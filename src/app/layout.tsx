@@ -2,6 +2,7 @@ import Navbar from '@/components/layout/navbar'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter, Roboto } from 'next/font/google'
+import Providers from '@/lib/providers'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -27,8 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${roboto.variable}`}>
       <body>
-        <Navbar />
-        {children}
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
+        
         </body>
     </html>
   )

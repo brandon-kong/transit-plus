@@ -18,6 +18,8 @@ import {
 import Image from "next/image";
 import Link from 'next/link';
 
+import { useLoginModal } from '@/lib/providers/modals/LoginModal/context';
+
 const components: { title: string; href: string; description: string }[] = [
     {
       title: "Report Train Fullness",
@@ -57,8 +59,10 @@ const components: { title: string; href: string; description: string }[] = [
   ]
 
 export default function Navbar () {
+    const { setOpen } = useLoginModal();
+
     return (
-        <div className=" px-[20px] md:px-[80px] flex justify-between items-center h-16 bg-white text-black relative" role="navigation">
+        <div className=" px-8 lg:px-[80px] flex justify-between items-center h-16 bg-white text-black relative" role="navigation">
             <div className="flex items-center">
                 <div className="flex-shrink-0 flex items-center">
                     <Image
@@ -93,7 +97,7 @@ export default function Navbar () {
                                 <NavigationMenuLink 
                                 className={navigationMenuTriggerStyle()}
                                 href="#">
-                                    See what's popping
+                                    See what&apos;s popping
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
 
@@ -122,8 +126,8 @@ export default function Navbar () {
             </div>
             <div className="items-center hidden md:flex">
                 <div className="flex-shrink-0 flex gap-4">
-                <Button variant={'ghost'} className="rounded-lg px-6" >Log in</Button>
-                    <Button variant={'outline'} className="rounded-lg text-black border border-black px-6" >Sign up now</Button>
+                    <Button variant={'ghost'} className="rounded-lg px-6" onClick={() => setOpen(true)} >Log in</Button>
+                    <Button variant={'outline'} className="rounded-lg text-black border border-black px-6" onClick={() => setOpen(true)}>Sign up now</Button>
                 </div>
             </div>
             <Button 
@@ -165,3 +169,5 @@ const ListItem = React.forwardRef<
     </li>
   )
 })
+
+ListItem.displayName = "NavigationMenu.Item"

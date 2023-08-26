@@ -1,8 +1,8 @@
 export function TypographyH1({ children, className }: { children: React.ReactNode, className?: string }) {
     return (
-      <h1 className={`scroll-m-20 text-4xl leading-normal lg:leading-tight font-extrabold lg:text-5xl ${className && className}`}>
+      <span className={`scroll-m-20 text-4xl leading-normal lg:leading-tight font-extrabold lg:text-5xl ${className && className}`}>
         { children }
-      </h1>
+      </span>
     )
 }
 
@@ -32,7 +32,7 @@ export function TypographyH4({ children, className }: { children: React.ReactNod
 
 export function TypographyP({ children, className }: { children: React.ReactNode, className?: string }) {
     return (
-      <p className={`leading-7 ${className && className}`}>
+      <p className={`leading-2 ${className && className}`}>
         { children }
       </p>
     )
