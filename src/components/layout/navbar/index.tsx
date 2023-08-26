@@ -58,7 +58,7 @@ const components: { title: string; href: string; description: string }[] = [
 
 export default function Navbar () {
     return (
-        <div className=" px-[20px] md:px-[80px] flex justify-between items-center h-16 bg-white text-black relative shadow-sm" role="navigation">
+        <div className=" px-[20px] md:px-[80px] flex justify-between items-center h-16 bg-white text-black relative" role="navigation">
             <div className="flex items-center">
                 <div className="flex-shrink-0 flex items-center">
                     <Image
