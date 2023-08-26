@@ -17,15 +17,15 @@ import { Button } from "@/components/ui/button";
 
 import { TypographyH3, TypographyP } from "@/components/typography";
 import { LoginModalContext } from "@/lib/providers/modals/LoginModal/context";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/input/inputbox";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@radix-ui/react-separator";
+import { SocialButton } from "@/components/input/buttons";
 
 const LoginModal = ({ open, setOpen }: LoginModalContext) => {
     return (
         <Dialog open={open} onOpenChange={setOpen} >
-            <DialogContent id="login-dialog">
-                <DialogHeader className='pb-4'>
+            <DialogContent id="login-dialog" className="max-w-[600px]">
+                <DialogHeader>
                     <DialogTitle>
                        <TypographyH3>
                             Sign in to Transit+
@@ -41,7 +41,7 @@ const LoginModal = ({ open, setOpen }: LoginModalContext) => {
                 
                 <div>
                     <Label htmlFor="email" className="text-[#0F172A]">Email</Label>
-                    <Input placeholder="Email" name="email" className="transition-all h-12" />
+                    <Input placeholder="Email" name="email" className="transition-all h-12" type="email" />
                 </div>
 
                 <div>
@@ -59,45 +59,30 @@ const LoginModal = ({ open, setOpen }: LoginModalContext) => {
                     <hr className="w-full" />
                 </div>
 
-                <Button variant={"outline"} className="flex gap-2 relative h-12">
-                    <Image 
-                    src={'/icons/brand/google.svg'} 
-                    alt="Workflow" width={20} height={20}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2"
-                    />
-                    Continue with Google
-                </Button>
+                <SocialButton
+                src={'/icons/brand/google.svg'}
+                >
+                Continue with Google
+                </SocialButton>
 
-                <Button variant={"outline"} className="flex gap-2 relative h-12">
-                    <Image 
-                    src={'/icons/brand/apple.svg'} 
-                    alt="Workflow" width={20} height={20}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2"
-                    />
-                    Continue with Apple
-                </Button>
+                <SocialButton
+                src={'/icons/brand/apple.svg'}
+                >
+                Continue with Apple
+                </SocialButton>
 
-                <Button variant={"outline"} className="flex gap-2 relative h-12">
-                    <Image 
-                    src={'/icons/brand/phone.svg'} 
-                    alt="Workflow" width={20} height={20}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2"
-                    />
-                    Continue with Phone
-                </Button>
+                <SocialButton
+                src={'/icons/brand/phone.svg'}
+                >
+                Continue with Phone
+                </SocialButton>
 
-                <Button variant={"outline"} className="flex gap-2 relative h-12">
-                    <Image 
-                    src={'/icons/brand/mail.svg'} 
-                    alt="Workflow" width={20} height={20}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2"
-                    />
-                    Continue with Email
-                </Button>
+                <SocialButton
+                src={'/icons/brand/mail.svg'}
+                >
+                Continue with Email
+                </SocialButton>
 
-
-                
-                
                </div>
             </DialogContent>
         </Dialog>
