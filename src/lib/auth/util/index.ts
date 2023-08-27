@@ -77,6 +77,25 @@ export async function sendPhoneOTP(phone: string, country_code: string): Promise
     }
 }
 
+export async function callUserWithOTP(phone: string, country_code: string): Promise<Success | Error> {
+    const phoneWithCountryCode = country_code + phone;
+
+    try {
+        const { data, status } = await api.post('/accounts/otp/call/', {
+            phone: phoneWithCountryCode,
+           
+        });
+
+        const response: Success | Error = data;
+         response.status_code = status;
+        return response;
+    } catch (error: any) {
+        const response: Error = error.response ? error.response.data : {};
+        response.status_code = 400;
+        return response;
+    }
+}
+
 type VerifyPhoneOTPProps = {
     phone: string;
     country_code: string;

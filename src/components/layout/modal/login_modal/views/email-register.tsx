@@ -4,46 +4,44 @@ import { Button } from "@/components/ui/button"
 import { signIn } from "next-auth/react"
 
 import { useLoginStore } from "@/lib/state/login"
-import { registerUserWithPhone } from "@/lib/auth/util"
+import { registerUserWithEmail, registerUserWithPhone } from "@/lib/auth/util"
 
 import { useLoginModal } from "@/lib/providers/modals/LoginModal/context"
 
-export default function PhoneRegisterView () {
+export default function EmailRegisterView () {
     const { setOpen } = useLoginModal()
 
     const setLoading = useLoginStore((state) => state.setLoading)
     const email = useLoginStore((state) => state.email)
     const setEmail = useLoginStore((state) => state.setEmail)
-    const otp = useLoginStore((state) => state.otp)
     const countryCode = useLoginStore((state) => state.countryCode)
-    const phone = useLoginStore((state) => state.phone)
     const birth_date = useLoginStore((state) => state.dateOfBirth)
     const setBirthDate = useLoginStore((state) => state.setDateOfBirth)
+
+    const password = useLoginStore((state) => state.password)
+    const setPassword = useLoginStore((state) => state.setPassword)
 
     const firstName = useLoginStore((state) => state.firstName)
     const setFirstName = useLoginStore((state) => state.setFirstName)
     const lastName = useLoginStore((state) => state.lastName)
     const setLastName = useLoginStore((state) => state.setLastName)
 
-    const attemptPhoneRegister = async () => {
+    const attemptEmailRegister = async () => {
         setLoading(true)
 
-        const registered = await registerUserWithPhone({
+        const registered = await registerUserWithEmail({
             email,
             firstName,
             lastName,
             birth_date,
-            phone,
-            countryCode,
-            otp
+            password
         })
 
         if (registered.status_code === 201) {
             // sign in
-            const signedIn = await signIn('phone-otp', {
-                phone,
-                token: otp,
-                country_code: countryCode,
+            const signedIn = await signIn('email-password', {
+                email,
+                password,
 
                 callbackUrl: 'http://localhost:3000/'
             })
@@ -93,6 +91,15 @@ export default function PhoneRegisterView () {
             />
 
             <InputWithLabel
+            label="Password"
+            placeholder="Password"
+            name="password"
+            className="transition-all"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <InputWithLabel
             label="Date of Birth"
             placeholder="Date of Birth"
             name="date_of_birth"
@@ -102,7 +109,7 @@ export default function PhoneRegisterView () {
             onChange={(e) => setBirthDate(e.target.value)}
             />
                
-            <Button onClick={attemptPhoneRegister} size={'lg'} className={'my-4 bg-black hover:bg-gray-900 h-12'}>
+            <Button onClick={attemptEmailRegister} size={'lg'} className={'my-4 bg-black hover:bg-gray-900 h-12'}>
                 Finish Registration
             </Button>
 

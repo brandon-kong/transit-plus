@@ -75,6 +75,7 @@ export default function LoginModalLoginView () {
             {
                 emailOrPhone === 'email' ? (
                 <InputWithLabel
+                autoFocus
                 label="Email"
                 placeholder="Email"
                 name="email"
@@ -84,6 +85,7 @@ export default function LoginModalLoginView () {
                 />
                 ) : (
                     <PhoneInput
+                    autoFocus
                     changed={({ dialCode, phone }) => {
                         setPhone(phone)
                         setCountryCode(dialCode)

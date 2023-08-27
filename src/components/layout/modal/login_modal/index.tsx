@@ -12,7 +12,7 @@ import {
 
 import { TypographyH3, TypographyP } from "@/components/typography";
 import { LoginModalContext } from "@/lib/providers/modals/LoginModal/context";
-import { BackButton } from "@/components/input/buttons";
+import { BackButton, CloseButton } from "@/components/input/buttons";
 
 import { useLoginStore } from "@/lib/state/login";
 
@@ -20,6 +20,7 @@ import LoginModalLoginView from "./views/login";
 import EmailLoginView from "./views/email-login";
 import OTPVerifyView from "./views/otp-verify";
 import PhoneRegisterView from "./views/phone-register";
+import EmailRegisterView from "./views/email-register";
 
 const LoginStates: { [key: string]: any } = {
     'login': {
@@ -41,6 +42,11 @@ const LoginStates: { [key: string]: any } = {
         title: 'Finish your registration',
         description: 'We just need a few more details to finish your registration.',
         view: <PhoneRegisterView />
+    },
+    'email-register': {
+        title: 'Finish your registration',
+        description: 'We just need a few more details to finish your registration.',
+        view: <EmailRegisterView />
     }
 }
 
@@ -55,14 +61,22 @@ const LoginModal = ({ open, setOpen }: LoginModalContext) => {
 
                     {
                         view === 'login' ? (
-                        <Image
-                        src={'/brand/transit-logo.png'}
-                        alt="Transit+ Logo"
-                        width={40}
-                        height={40}
+                        <>
+                            <Image
+                            src={'/brand/transit-logo.png'}
+                            alt="Transit+ Logo"
+                            width={40}
+                            height={40}
 
-                        className={'mb-4'}
-                        />
+                            className={'mb-4'}
+                            />
+
+                            <CloseButton
+                            onClick={() => setOpen(false)}
+                            className={'absolute top-3 right-4'}
+                            />
+                        </>
+                        
                         ) : <BackButton onClick={() => setView('login')}/>
                     }
                     

@@ -26,6 +26,7 @@ import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { BackButton } from '@/components/input/buttons';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from '@/components/ui/menubar';
 
 const components: { title: string; href: string; description: string }[] = [
     {
@@ -136,22 +137,24 @@ export default function Navbar () {
                 {
                     status === 'authenticated' ? (
                         <>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger className={'rounded-full'}>
-                                <Avatar className={'rounded-full'}>
-                                    <AvatarImage className={'rounded-full'} src={'https://github.com/shadcn.png'} />
-                                    <AvatarFallback>JD</AvatarFallback>
-                                </Avatar>
-                            </DropdownMenuTrigger>
+                        <Menubar className="border-none">
+                            <MenubarMenu>
+                                <MenubarTrigger className={'rounded-full border-none'}>
+                                    <Avatar className={'rounded-full'}>
+                                        <AvatarImage className={'rounded-full'} src={'https://github.com/shadcn.png'} />
+                                        <AvatarFallback>JD</AvatarFallback>
+                                    </Avatar>
+                                </MenubarTrigger>
 
-                            <DropdownMenuContent>
-                                <DropdownMenuItem
-                                onClick={() => signOut()}
-                                >
-                                    Logout
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                                <MenubarContent>
+                                    <MenubarItem
+                                    onClick={() => signOut()}
+                                    >
+                                        Logout
+                                    </MenubarItem>
+                                </MenubarContent>
+                            </MenubarMenu>
+                        </Menubar>
                             
 
                         </>

@@ -91,7 +91,7 @@ export const PhoneInput = ({ className, changed, ...props }: {
     return (
         <div>
             <Select onValueChange={handleDialCodeChange}>
-                <SelectTrigger className="bg-gray-100 px-4 z-50 h-12 rounded-b-none">
+                <SelectTrigger className="bg-gray-100 px-4 z-50 h-12 transition-all rounded-b-none data-[state=open]:bg-white data-[state=open]:ring-2 data-[state=open]:ring-black">
                     <SelectValue className="text-gray-800">
                         {country} ({dialCode})
                     </SelectValue>
