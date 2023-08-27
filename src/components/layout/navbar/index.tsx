@@ -15,7 +15,7 @@ import {
     navigationMenuTriggerStyle,
   } from "@/components/ui/navigation-menu"
 
-  import { useSession } from 'next-auth/react';
+  import { useSession, signOut } from 'next-auth/react';
 
 import Image from "next/image";
 import Link from 'next/link';
@@ -24,6 +24,8 @@ import { useLoginModal } from '@/lib/providers/modals/LoginModal/context';
 import { Avatar } from '@/components/ui/avatar';
 import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { BackButton } from '@/components/input/buttons';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
+import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 
 const components: { title: string; href: string; description: string }[] = [
     {
@@ -134,10 +136,23 @@ export default function Navbar () {
                 {
                     status === 'authenticated' ? (
                         <>
-                            <Avatar className={'rounded-full'}>
-                                <AvatarImage className={'rounded-full'} src={'https://github.com/shadcn.png'} />
-                                <AvatarFallback>JD</AvatarFallback>
-                            </Avatar>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger className={'rounded-full'}>
+                                <Avatar className={'rounded-full'}>
+                                    <AvatarImage className={'rounded-full'} src={'https://github.com/shadcn.png'} />
+                                    <AvatarFallback>JD</AvatarFallback>
+                                </Avatar>
+                            </DropdownMenuTrigger>
+
+                            <DropdownMenuContent>
+                                <DropdownMenuItem
+                                onClick={() => signOut()}
+                                >
+                                    Logout
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                            
 
                         </>
                         

@@ -12,7 +12,7 @@ import { TypographyP } from "@/components/typography";
 export const Input = ({ className, ...props }: React.ComponentPropsWithoutRef<typeof ShadInput>) => (
     <ShadInput
         className={cn(
-            "bg-gray-100 placeholder:text-gray-800 h-12",
+            "bg-gray-100 focus:bg-white placeholder:text-gray-800 h-12",
             className
         )}
         {...props}
@@ -128,7 +128,7 @@ export const PhoneInput = ({ className, changed, ...props }: {
                 value={formattedPhoneInput}
                 placeholder="Phone Number"
                 className={cn(
-                    "bg-gray-100 rounded-t-none transition-all border-t-0 border-l-0 rounded-bl-none placeholder:text-gray-800 h-12",
+                    "bg-gray-100 focus:bg-white rounded-t-none transition-all border-t-0 border-l-0 rounded-bl-none placeholder:text-gray-800 h-12",
                     className
                 )}
                 {...props}
@@ -142,7 +142,7 @@ export const PhoneInput = ({ className, changed, ...props }: {
 export const PinInput = ({ className, ...props }: React.ComponentPropsWithoutRef<typeof ShadInput>) => (
     <ShadInput
         className={cn(
-            "bg-gray-100 placeholder:text-gray-800 h-12",
+            "bg-gray-100 focus:bg-white placeholder:text-gray-800 h-12",
             className
         )}
         {...props}
