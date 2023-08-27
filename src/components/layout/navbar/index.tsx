@@ -15,10 +15,15 @@ import {
     navigationMenuTriggerStyle,
   } from "@/components/ui/navigation-menu"
 
+  import { useSession } from 'next-auth/react';
+
 import Image from "next/image";
 import Link from 'next/link';
 
 import { useLoginModal } from '@/lib/providers/modals/LoginModal/context';
+import { Avatar } from '@/components/ui/avatar';
+import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
+import { BackButton } from '@/components/input/buttons';
 
 const components: { title: string; href: string; description: string }[] = [
     {
@@ -35,7 +40,7 @@ const components: { title: string; href: string; description: string }[] = [
     },
     {
       title: "Safety Concern",
-      href: "#",
+      href: "report/safety",
       description:
         "Report a safety concern to help others safely plan their trips.",
     },
@@ -60,6 +65,7 @@ const components: { title: string; href: string; description: string }[] = [
 
 export default function Navbar () {
     const { setOpen } = useLoginModal();
+    const { data: session, status } = useSession();
 
     return (
         <div className=" px-8 lg:px-[80px] flex justify-between items-center h-16 bg-white text-black relative" role="navigation">
@@ -125,10 +131,24 @@ export default function Navbar () {
                 </div>
             </div>
             <div className="items-center hidden md:flex">
-                <div className="flex-shrink-0 flex gap-4">
-                    <Button variant={'ghost'} className="rounded-lg px-6" onClick={() => setOpen(true)} >Log in</Button>
-                    <Button variant={'outline'} className="rounded-lg text-black border border-black px-6" onClick={() => setOpen(true)}>Sign up now</Button>
-                </div>
+                {
+                    status === 'authenticated' ? (
+                        <>
+                            <Avatar className={'rounded-full'}>
+                                <AvatarImage className={'rounded-full'} src={'https://github.com/shadcn.png'} />
+                                <AvatarFallback>JD</AvatarFallback>
+                            </Avatar>
+
+                        </>
+                        
+                    ) : (
+                        <div className="flex-shrink-0 flex gap-4">
+                            <Button variant={'ghost'} className="rounded-lg px-6" onClick={() => setOpen(true)} >Log in</Button>
+                            <Button variant={'outline'} className="rounded-lg text-black border border-black px-6" onClick={() => setOpen(true)}>Sign up now</Button>
+                        </div>
+                    )
+                }
+                
             </div>
             <Button 
             

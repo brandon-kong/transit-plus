@@ -5,85 +5,82 @@ import Image from "next/image";
 import {
     Dialog,
     DialogContent,
-    DialogTrigger,
     DialogTitle,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
-    DialogClose,
 } from "@/components/ui/dialog";
-
-import { Button } from "@/components/ui/button";
 
 import { TypographyH3, TypographyP } from "@/components/typography";
 import { LoginModalContext } from "@/lib/providers/modals/LoginModal/context";
-import { Input } from "@/components/input/inputbox";
-import { Label } from "@/components/ui/label";
-import { SocialButton } from "@/components/input/buttons";
+import { BackButton } from "@/components/input/buttons";
+
+import { useLoginStore } from "@/lib/state/login";
+
+import LoginModalLoginView from "./views/login";
+import EmailLoginView from "./views/email-login";
+import OTPVerifyView from "./views/otp-verify";
+import PhoneRegisterView from "./views/phone-register";
+
+const LoginStates: { [key: string]: any } = {
+    'login': {
+        title: 'Sign in to Transit+',
+        description: 'Log in or create an account to start earning by crowdsourcing.',
+        view: <LoginModalLoginView />
+    },
+    'email-verify': {
+        title: 'Verify your email',
+        description: 'Let\'s make sure it\'s really you!',
+        view: <EmailLoginView />
+    },
+    'otp-verify': {
+        title: 'Verify your phone number',
+        description: 'We sent you a fun little code to verify your phone number. Enter it below!',
+        view: <OTPVerifyView />
+    },
+    'phone-register': {
+        title: 'Finish your registration',
+        description: 'We just need a few more details to finish your registration.',
+        view: <PhoneRegisterView />
+    }
+}
 
 const LoginModal = ({ open, setOpen }: LoginModalContext) => {
+    const view = useLoginStore((state) => state.view);
+    const setView = useLoginStore((state) => state.setView);
+
     return (
         <Dialog open={open} onOpenChange={setOpen} >
-            <DialogContent id="login-dialog" className="max-w-[600px]">
+            <DialogContent id="login-dialog" className="max-w-[550px]">
                 <DialogHeader>
+
+                    {
+                        view === 'login' ? (
+                        <Image
+                        src={'/brand/transit-logo.png'}
+                        alt="Transit+ Logo"
+                        width={40}
+                        height={40}
+
+                        className={'mb-4'}
+                        />
+                        ) : <BackButton onClick={() => setView('login')}/>
+                    }
+                    
+
                     <DialogTitle>
                        <TypographyH3>
-                            Sign in to Transit+
+                            {LoginStates[view] && LoginStates[view].title}
                        </TypographyH3>
                     </DialogTitle>
                     <DialogDescription>
                         <TypographyP>
-                            Log in or create an account to start earning by crowdsourcing.
+                            {LoginStates[view] && LoginStates[view].description}
                         </TypographyP>
                     </DialogDescription>
                 </DialogHeader>
-               <div className="flex flex-col gap-4 mt-4">
-                
-                <div>
-                    <Label htmlFor="email" className="text-[#0F172A]">Email</Label>
-                    <Input placeholder="Email" name="email" className="transition-all h-12" type="email" />
-                </div>
-
-                <div>
-                    <Label htmlFor="password" className="text-[#0F172A]">Password</Label>
-                    <Input placeholder="Password" name="password" className="transition-all h-12" type="password" />
-                </div>
-
-                <Button size={'lg'} className={'bg-[#35927B] hover:bg-[#15826B] h-12'}>
-                    Login
-                </Button>
-
-                <div className="flex my-4 justify-center items-center gap-4 w-full">
-                    <hr className="w-full" />
-                    or
-                    <hr className="w-full" />
-                </div>
-
-                <SocialButton
-                src={'/icons/brand/google.svg'}
-                >
-                Continue with Google
-                </SocialButton>
-
-                <SocialButton
-                src={'/icons/brand/apple.svg'}
-                >
-                Continue with Apple
-                </SocialButton>
-
-                <SocialButton
-                src={'/icons/brand/phone.svg'}
-                >
-                Continue with Phone
-                </SocialButton>
-
-                <SocialButton
-                src={'/icons/brand/mail.svg'}
-                >
-                Continue with Email
-                </SocialButton>
-
-               </div>
+                {
+                    LoginStates[view] && LoginStates[view].view
+                }
             </DialogContent>
         </Dialog>
     )

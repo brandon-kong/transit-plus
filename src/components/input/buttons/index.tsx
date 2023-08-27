@@ -24,3 +24,21 @@ export const SocialButton = ({ src, children, className, ...props }: {
         </span>
     </Button>
 )
+
+export const BackButton = ({ className, ...props }: {
+    className?: string;
+} & ButtonProps) => (
+    <Button
+    variant={"outline"} className={`flex gap-2 w-fit aspect-square mb-4 relative rounded-full ${className}`}
+    {...props}
+    >
+        <Image 
+        src={'/icons/action/back.svg'} 
+        alt="Back Icon"
+        width={24}
+        height={24}
+        className="absolute top-1/2 transform -translate-y-1/2"
+        
+        />
+    </Button>
+);
