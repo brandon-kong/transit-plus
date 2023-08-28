@@ -1,6 +1,16 @@
 import { create } from 'zustand';
 
-export type View = 'location'
+export type View = 'location' | 'date-time'
+
+export type Address = {
+    address_line1: string;
+    address_line2: string;
+    city: string;
+    region: string;
+    zip: string;
+    country: string;
+    completed: boolean;
+}
 
 export const useReportSafetyStore = create<ReportSafetyStore>((set) => ({
     loading: false,
@@ -19,7 +29,26 @@ export const useReportSafetyStore = create<ReportSafetyStore>((set) => ({
         lat: 41.88,
         lng: -87.62
     },
-    setLocation: (location: { lat: number, lng: number }) => set({ location })
+
+    address: {
+        address_line1: '',
+        address_line2: '',
+        city: '',
+        region: '',
+        zip: '',
+        country: '',
+        completed: false
+    },
+
+    setAddress: (address: Address) => set({ address }),
+
+    setLocation: (location: { lat: number, lng: number }) => set({ location }),
+
+    date: new Date(),
+    setDate: (date: Date) => set({ date }),
+
+    time: new Date(),
+    setTime: (time: Date) => set({ time })
 }));
 
 export interface ReportSafetyStore {
@@ -39,5 +68,15 @@ export interface ReportSafetyStore {
         lat: number;
         lng: number;
     }
+
+    address: Address
+    setAddress: (address: Address) => void;
+
     setLocation: (location: { lat: number, lng: number }) => void;
+
+    date: Date;
+    setDate: (date: Date) => void;
+
+    time: Date;
+    setTime: (time: Date) => void;
 }

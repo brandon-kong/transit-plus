@@ -4,6 +4,8 @@ import type { Metadata } from 'next'
 import { Inter, Roboto } from 'next/font/google'
 import Providers from '@/lib/providers'
 
+import Script from 'next/script'
+
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter'
@@ -28,6 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${roboto.variable}`}>
       <body>
+        <Script
+          src={`https://maps.google.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places&callback=Function.prototype`}
+          strategy={'afterInteractive'}
+        />
         <Providers>
           <Navbar />
           {children}

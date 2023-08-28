@@ -17,13 +17,20 @@ import { BackButton, CloseButton } from "@/components/input/buttons";
 import { useReportSafetyStore } from "@/lib/state/report_safety";
 
 import ReportSafetyLocationView from "./views/location";
+import ReportSafetyDateTimeView from "./views/date-time";
+
 import { BlackSpinner } from "@/components/spinner";
 
-const LoginStates: { [key: string]: any } = {
+const ReportSafetyStates: { [key: string]: any } = {
     'location': {
         title: 'Report Safety Concern',
         description: 'Thank you for helping us make transit safer for everyone.',
         view: <ReportSafetyLocationView />
+    },
+    'date-time': {
+        title: 'Report Safety Concern',
+        description: 'You don\'t have to be exact, but please provide as much detail as possible.',
+        view: <ReportSafetyDateTimeView />
     },
 }
 
@@ -67,20 +74,16 @@ const ReportSafetyModal = ({ open, setOpen }: LoginModalContext) => {
                         )
                     }
                     
-                    <DialogTitle className="z-20">
-                       <TypographyH3>
-                            {LoginStates[view] && LoginStates[view].title}
-                       </TypographyH3>
-                    </DialogTitle>
+                    <TypographyH3>
+                        {ReportSafetyStates[view] && ReportSafetyStates[view].title}
+                    </TypographyH3>
                     <DialogDescription className="z-20">
-                        <TypographyP>
-                            {LoginStates[view] && LoginStates[view].description}
-                        </TypographyP>
+                        {ReportSafetyStates[view] && ReportSafetyStates[view].description}
                     </DialogDescription>
                     
                 </DialogHeader>
                 {
-                    LoginStates[view] && LoginStates[view].view
+                    ReportSafetyStates[view] && ReportSafetyStates[view].view
                 }
             </DialogContent>
         </Dialog>

@@ -81,6 +81,7 @@ export default function Navbar () {
                         alt="Workflow"
                         width={40}
                         height={40}
+                        priority
 
                         className="h-8 w-auto"
                         />
