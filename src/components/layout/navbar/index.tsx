@@ -27,6 +27,7 @@ import { BackButton } from '@/components/input/buttons';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from '@/components/ui/menubar';
+import { BlackSpinner } from '@/components/spinner';
 
 const components: { title: string; href: string; description: string }[] = [
     {
@@ -74,14 +75,16 @@ export default function Navbar () {
         <div className=" px-8 lg:px-[80px] flex justify-between items-center h-16 bg-white text-black relative" role="navigation">
             <div className="flex items-center">
                 <div className="flex-shrink-0 flex items-center">
-                    <Image
-                    src={'/brand/transit.svg'}
-                    alt="Workflow"
-                    width={40}
-                    height={40}
+                    <Link href="/">
+                        <Image
+                        src={'/brand/transit.svg'}
+                        alt="Workflow"
+                        width={40}
+                        height={40}
 
-                    className="h-8 w-auto"
-                    />
+                        className="h-8 w-auto"
+                        />
+                    </Link>
 
                     <NavigationMenu className={'ml-12 hidden lg:block'}>
                         <NavigationMenuList className={'gap-2'}>
@@ -89,7 +92,7 @@ export default function Navbar () {
 
                                 <NavigationMenuLink 
                                 className={navigationMenuTriggerStyle()}
-                                href="#">
+                                href="/plan">
                                     Plan trip
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
@@ -135,18 +138,20 @@ export default function Navbar () {
             </div>
             <div className="items-center hidden md:flex">
                 {
-                    status === 'authenticated' ? (
+                    status === 'loading' ? (
+                        <BlackSpinner />
+                    ) : ( status === 'authenticated' ? (
                         <>
                         <Menubar className="border-none">
                             <MenubarMenu>
-                                <MenubarTrigger className={'rounded-full border-none'}>
+                                <MenubarTrigger className={'rounded-full border-none cursor-pointer'}>
                                     <Avatar className={'rounded-full'}>
                                         <AvatarImage className={'rounded-full'} src={'https://github.com/shadcn.png'} />
                                         <AvatarFallback>JD</AvatarFallback>
                                     </Avatar>
                                 </MenubarTrigger>
 
-                                <MenubarContent>
+                                <MenubarContent align='end'>
                                     <MenubarItem
                                     onClick={() => signOut()}
                                     >
@@ -158,15 +163,13 @@ export default function Navbar () {
                             
 
                         </>
-                        
                     ) : (
                         <div className="flex-shrink-0 flex gap-4">
                             <Button variant={'ghost'} className="rounded-lg px-6" onClick={() => setOpen(true)} >Log in</Button>
                             <Button variant={'outline'} className="rounded-lg text-black border border-black px-6" onClick={() => setOpen(true)}>Sign up now</Button>
                         </div>
-                    )
+                    ))
                 }
-                
             </div>
             <Button 
             

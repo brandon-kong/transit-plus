@@ -18,7 +18,9 @@ export default function EmailLoginView () {
     const password = useLoginStore((state) => state.password)
     const setPassword = useLoginStore((state) => state.setPassword)
 
-    const attemptEmailLogin = async () => {
+    const attemptEmailLogin = async (e: any) => {
+        e.preventDefault()
+        
         setLoading(true)
 
         const verified = await signIn('email-password', {
@@ -39,7 +41,7 @@ export default function EmailLoginView () {
     }
 
     return (
-        <div className="flex flex-col gap-4 mt-4">
+        <form onSubmit={attemptEmailLogin} className="flex flex-col gap-4 mt-4">
 
             <InputWithLabel
             label="Email"
@@ -51,6 +53,7 @@ export default function EmailLoginView () {
             />
 
             <InputWithLabel
+            autoFocus
             label="Password"
             placeholder="Password"
             name="password"
@@ -61,10 +64,10 @@ export default function EmailLoginView () {
                
             
 
-            <Button size={'lg'} onClick={attemptEmailLogin} className={'my-4 bg-black hover:bg-gray-900 h-12'}>
+            <Button size={'lg'} type="submit" className={'my-4 bg-black hover:bg-gray-900 h-12'}>
                 Join back on the road
             </Button>
 
-        </div>
+        </form>
     )
 }

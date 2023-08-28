@@ -15,6 +15,12 @@ const authOptions: NextAuthOptions = {
         strategy: 'jwt',
     },
 
+    pages: {
+        signIn: '/?login=1',
+        signOut: '/?logout=1',
+        error: '/?login=1&auth_error=1',
+    },
+    
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,

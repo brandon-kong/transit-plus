@@ -11,6 +11,7 @@ import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } fro
 
 import { useLoginModal } from "@/lib/providers/modals/LoginModal/context"
 import { useState, useEffect } from "react"
+import { Error } from "@/types/response/types"
 
 export default function OTPVerifyView () {
     const { setOpen } = useLoginModal()
@@ -54,6 +55,8 @@ export default function OTPVerifyView () {
         if (sentOTP.status_code === 200) {
             //return;
         }
+
+        setLoading(false)
     };
 
     const attemptPhoneCallOTP = async () => {
@@ -63,9 +66,13 @@ export default function OTPVerifyView () {
         if (sentOTP.status_code === 200) {
             //return;
         }
+
+        setLoading(false)
     };
     
-    const attemptVerifyOtp = async () => {
+    const attemptVerifyOtp = async (e: any) => {
+        e.preventDefault()
+        
         setLoading(true)
 
         const otpVerified = await verifyPhoneOTP({
@@ -106,21 +113,40 @@ export default function OTPVerifyView () {
                 else {
                     // TODO: handle error
                 }
-                return;
             }
 
             else {
                 // register them
                 setView('phone-register');
-                return;
+            }
+        }
+        else {
+            const errorResponse = otpVerified as Error;
+
+            switch (errorResponse.error_type) {
+                case 'invalid_token':
+                    //toast.error('Invalid OTP. Please try again.');
+                    break;
+
+                case 'invalid_phone_number':
+                    //toast.error('Invalid phone number. Please try again with a different phone number.');
+                    break;
+
+                case 'token_attempts_exceeded':
+                    //toast.error('Too many attempts. Please try again later.');
+
+                    setView('login');
+                    break;
             }
         }
         
         // TODO: handle error
+
+        setLoading(false)
     }
 
     return (
-        <div className="flex flex-col gap-4 mt-4">
+        <form onSubmit={attemptVerifyOtp} className="flex flex-col gap-4 mt-4">
 
             <PinInput 
             autoFocus
@@ -138,8 +164,8 @@ export default function OTPVerifyView () {
                 <Menubar className="border-none">
                     
                     <MenubarMenu>
-                        <MenubarTrigger>
-                            <Button variant={'ghost'} onClick={attemptVerifyOtp} size={'lg'} className={'flex gap-2 mt-4 h-12 data-[state=open]:bg-accent'}>
+                        <MenubarTrigger className="h-0">
+                            <Button type="button" variant={'ghost'} size={'lg'} className={'flex gap-2 mt-4 h-12 data-[state=open]:bg-accent'}>
                                 Options
                                 <Image
                                 src="/icons/action/down.svg"
@@ -166,12 +192,12 @@ export default function OTPVerifyView () {
                     </MenubarMenu>
                 </Menubar>
                 
-                <Button onClick={attemptVerifyOtp} size={'lg'} className={'mt-4 bg-black hover:bg-gray-900 w-full h-12'}>
+                <Button type="submit" size={'lg'} className={'mt-4 bg-black hover:bg-gray-900 w-full h-12'}>
                     Continue
                 </Button>
             </DialogFooter>
             
 
-        </div>
+        </form>
     )
 }

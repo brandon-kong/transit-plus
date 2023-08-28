@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react"
 
 import { useLoginStore } from "@/lib/state/login"
 import { sendPhoneOTP, userExistsWithEmail } from "@/lib/auth/util"
+import { useState } from "react"
 
 export default function LoginModalLoginView () {
     const signInWithGoogle = () => {
@@ -39,7 +40,6 @@ export default function LoginModalLoginView () {
                 setView('email-register');
             }
             
-            return;
         }
 
         // TODO: handle error
@@ -53,7 +53,6 @@ export default function LoginModalLoginView () {
         const sentOTP = await sendPhoneOTP(phone, countryCode)
         if (sentOTP.status_code === 200) {
             setView('otp-verify');
-            return;
         }
 
         // TODO: handle error
@@ -61,43 +60,49 @@ export default function LoginModalLoginView () {
         setLoading(false)
     }
 
-    const handleContinue = () => {
+    const handleContinue = (e: any) => {
+        e.preventDefault()
+
         if (emailOrPhone === 'email') {
             attemptEmailLogin()
         } else {
             attemptPhoneSendOTP()
         }
+
+        return;
     }
 
     return (
         <div className="flex flex-col gap-4 mt-4">
 
-            {
-                emailOrPhone === 'email' ? (
-                <InputWithLabel
-                autoFocus
-                label="Email"
-                placeholder="Email"
-                name="email"
-                className="transition-all"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                />
-                ) : (
-                    <PhoneInput
+            <form onSubmit={handleContinue} className="flex flex-col gap-4">
+                {
+                    emailOrPhone === 'email' ? (
+                    <InputWithLabel
                     autoFocus
-                    changed={({ dialCode, phone }) => {
-                        setPhone(phone)
-                        setCountryCode(dialCode)
-                    }}
+                    label="Email"
+                    placeholder="Email"
+                    name="email"
+                    className="transition-all"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     />
-                )
-            }
-            
+                    ) : (
+                        <PhoneInput
+                        autoFocus
+                        changed={({ dialCode, phone }) => {
+                            setPhone(phone)
+                            setCountryCode(dialCode)
+                        }}
+                        />
+                    )
+                }
+                
 
-            <Button onClick={handleContinue} size={'lg'} className={'my-4 bg-black hover:bg-gray-900 h-12'}>
-                Continue
-            </Button>
+                <Button type="submit" size={'lg'} className={'my-4 bg-black hover:bg-gray-900 h-12'}>
+                    Continue
+                </Button>
+            </form>
 
             <div className="flex mb-4 justify-center items-center gap-4 w-full">
                 <hr className="w-full" />

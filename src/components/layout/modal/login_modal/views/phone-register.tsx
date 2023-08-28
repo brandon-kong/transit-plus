@@ -66,19 +66,19 @@ export default function PhoneRegisterView () {
     return (
         <div className="flex flex-col gap-4 mt-4">
 
-            <div>
+            <div className="flex flex-col">
                 <Input 
                 autoFocus
                 placeholder="First Name"
                 name="first_name"
-                className="rounded-b-none border-b-0"
+                className="rounded-b-none border-b-0 focus:z-10"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 />
                 <Input 
                 placeholder="Last Name"
                 name="last_name"
-                className="rounded-t-none border-t-0"
+                className="rounded-t-none border-t-0 focus:z-10"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 />

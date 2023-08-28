@@ -6,13 +6,15 @@ import dial_codes from "@/lib/user-preferences/dial_codes";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
+import Image from "next/image";
+
 import { AsYouType, CountryCode } from 'libphonenumber-js/min';
 import { TypographyP } from "@/components/typography";
 
 export const Input = ({ className, ...props }: React.ComponentPropsWithoutRef<typeof ShadInput>) => (
     <ShadInput
         className={cn(
-            "bg-gray-100 focus:bg-white placeholder:text-gray-800 h-12",
+            "bg-gray-100 focus:bg-white transition-all placeholder:text-gray-800 h-12",
             className
         )}
         {...props}
@@ -91,7 +93,7 @@ export const PhoneInput = ({ className, changed, ...props }: {
     return (
         <div>
             <Select onValueChange={handleDialCodeChange}>
-                <SelectTrigger className="bg-gray-100 px-4 z-50 h-12 transition-all rounded-b-none data-[state=open]:bg-white data-[state=open]:ring-2 data-[state=open]:ring-black">
+                <SelectTrigger className="bg-gray-100 px-4 z-50 h-12 transition-all rounded-b-none data-[state=open]:z-10 data-[state=open]:bg-white data-[state=open]:ring-2 data-[state=open]:ring-black">
                     <SelectValue className="text-gray-800">
                         {country} ({dialCode})
                     </SelectValue>
@@ -148,3 +150,53 @@ export const PinInput = ({ className, ...props }: React.ComponentPropsWithoutRef
         {...props}
     />
 )
+
+export const MapSearchOverlay = () => {
+    const [search, setSearch] = useState<string>('');
+    const [results, setResults] = useState<string[]>([]);
+
+    const [focused, setFocused] = useState<boolean>(false);
+
+    return (
+        <div className="flex flex-col">
+            <Input 
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+
+            placeholder="Search for a location"
+            className="w-full bg-white drop-shadow-md pointer-events-auto focus:rounded-b-none focus:z-10"
+            />
+
+            {
+                focused && (
+                    <div className="drop-shadow-md">
+
+                        <LocationSearch
+                        isLast
+                        >
+                            <Image
+                            src="/icons/nav/navigation.svg"
+                            width={18}
+                            height={18}
+                            alt="Use my current location"
+                            />
+
+                            <TypographyP>
+                                Use my current location
+                            </TypographyP>
+                        </LocationSearch>
+                    </div>
+                )
+            }
+        </div>
+        
+    )
+}
+
+const LocationSearch = ({ children, isLast }: { children: React.ReactNode, isLast: boolean }) => {
+    return (
+        <div className={`pointer-events-auto transition-colors font-mono flex gap-2 bg-white p-4 cursor-pointer ${isLast ? 'rounded-b-lg' : 'rounded-b-none'} hover:bg-gray-50`}>
+            { children }
+        </div>
+    )
+}

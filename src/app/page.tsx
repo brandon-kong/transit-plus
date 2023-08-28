@@ -80,38 +80,45 @@ export default function Home() {
 
             
                 </section>
-                <motion.div
 
-                initial={{
-                    rotateX: 0,
-                    rotateY: 0,
-                    opacity: 0,
-
-                    y: 100,
-                }}
-                animate={{
-                    rotateX: 0,
-                    rotateY: 0,
-                    opacity: 1,
-
-                    y: 0,
-                }}
-
-                transition={{
-                    duration: 1,
-                }}
-
+                <div
+                className='md:min-w-[600px] w-full'
                 >
-                    <Image
-                    src={'/images/hero.svg'}
-                    alt="Workflow"
-                    width={500}
-                    height={520}
+                    <motion.div
 
-                    className={'max-h-[600px] w-auto select-none'}
-                    />
-                </motion.div>
-                
+                    initial={{
+                        rotateX: 0,
+                        rotateY: 0,
+                        opacity: 0,
+
+                        y: 100,
+                    }}
+                    animate={{
+                        rotateX: 0,
+                        rotateY: 0,
+                        opacity: 1,
+
+                        y: 0,
+                    }}
+
+                    transition={{
+                        duration: 1,
+                    }}
+
+                    className={'relative w-full h-full max-w-[600px] max-h-[600px]'}
+
+                    >
+                        <Image
+                        src={'/images/hero.svg'}
+                        alt="Workflow"
+                        width={500}
+                        height={520}
+
+                        className={'max-h-[600px] w-auto select-none'}
+                        />
+                    </motion.div>
+                </div>
+            
             </div>
 
             <div className='w-full bg-gray-100 min-h-[500px]'>
