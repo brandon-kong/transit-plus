@@ -32,14 +32,13 @@ export default function ReportSafetyLocationView () {
     const setView = useReportSafetyStore((state) => state.setView)
 
     const spawnIncidentMarker = useCallback((maps: any) => {
-        if (incidentMarker) {
+        if (incidentMarker && incidentLocation) {
             incidentMarker.setMap(null)
 
             const marker = new maps.Marker({
                 position: incidentLocation,
                 map: map,
                 draggable: true,
-                animation: maps.Animation.DROP,
             });
 
             marker.addListener('dragend', (drag: any) => {
@@ -50,7 +49,9 @@ export default function ReportSafetyLocationView () {
                 setMapPosition({ lat: lat(), lng: lng() })
             })
             marker.setZIndex(10)
+
             setIncidentMarker(marker)
+
         }
         else {
             if (location) {
@@ -75,7 +76,7 @@ export default function ReportSafetyLocationView () {
                 setIncidentMarker(marker)
             }
         }
-    }, [incidentMarker, incidentLocation, location, setLocation, setMapPosition, setIncidentLocation, setIncidentMarker, map])
+    }, [setLocation, setMapPosition, location, incidentMarker, setIncidentLocation, setIncidentMarker])
 
     const handleApiLoaded = (map: any, maps: any) => {
         setMap(map)
@@ -114,7 +115,7 @@ export default function ReportSafetyLocationView () {
             spawnIncidentMarker(maps)
         }
 
-    }, [setMapPosition, setUserLocation, address, spawnIncidentMarker, maps])
+    }, [maps, map, setMapPosition, setUserLocation, incidentLocation])
 
     return (
         <div className="flex flex-col gap-4 mt-4">
@@ -295,7 +296,7 @@ export default function ReportSafetyLocationView () {
                     yesIWantToUseGoogleMapApiInternals
                     onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
                     //bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string }}
-                    defaultCenter={{ lat: 41.88, lng: -87.62 }}
+                    defaultCenter={{ lat: userLocation?.lat || 41, lng: userLocation?.lng || -87.62 }}
                     defaultZoom={15}
 
                     options={{
@@ -303,8 +304,8 @@ export default function ReportSafetyLocationView () {
                     }}
 
                     center={{
-                        lat: incidentLocation?.lat || mapPosition.lat || 41.88,
-                        lng: incidentLocation?.lng || mapPosition.lng || -87.62
+                        lat: incidentLocation?.lat || userLocation?.lat || mapPosition.lat || 41.88,
+                        lng: incidentLocation?.lng || userLocation?.lng || mapPosition.lng || -87.62
                     }}
 
                     onDrag={(e) => {
@@ -331,6 +332,8 @@ export default function ReportSafetyLocationView () {
                     }
                     setIncidentLocation(undefined);
                     setIncidentMarker(undefined);
+
+                    setLocation(undefined)
 
                     setAddress({
                         address_line1: '',

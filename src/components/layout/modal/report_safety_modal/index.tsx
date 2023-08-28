@@ -18,6 +18,8 @@ import { useReportSafetyStore } from "@/lib/state/report_safety";
 
 import ReportSafetyLocationView from "./views/location";
 import ReportSafetyDateTimeView from "./views/date-time";
+import ReportSafetyIncidentView from "./views/incident";
+import ReportSafetySeverityView from "./views/severity";
 
 import { BlackSpinner } from "@/components/spinner";
 
@@ -32,6 +34,16 @@ const ReportSafetyStates: { [key: string]: any } = {
         description: 'You don\'t have to be exact, but please provide as much detail as possible.',
         view: <ReportSafetyDateTimeView />
     },
+    'incident': {
+        title: 'Report Safety Concern',
+        description: 'What type of incident did you witness?',
+        view: <ReportSafetyIncidentView />
+    },
+    'severity': {
+        title: 'Report Safety Concern',
+        description: 'Thank you for helping us make transit safer for everyone.',
+        view: <ReportSafetySeverityView />
+    },
 }
 
 const ReportSafetyModal = ({ open, setOpen }: LoginModalContext) => {
@@ -41,7 +53,7 @@ const ReportSafetyModal = ({ open, setOpen }: LoginModalContext) => {
 
     return (
         <Dialog open={open} onOpenChange={setOpen} >
-            <DialogContent id="login-dialog" className="max-w-[550px] overflow-hidden border-none">
+            <DialogContent id="login-dialog" className="max-w-[650px] overflow-hidden border-none">
 
                 <DialogHeader className="z-20">
 

@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 
-export type View = 'location' | 'date-time'
+export type View = 'location' | 'date-time' | 'incident' | 'severity'
+export type TypeOfIncident = 'Harassment / Inappropriate Behaviour' | 'Suspicious activity / Unattended Baggage' | 'Vandalism / Damages' | 'Health / Medical Emergency' | 'Safety Hazard / Dangerous Situation' | 'Other';
+export type Severity = 'Low' | 'Medium' | 'High';
 
 export type Address = {
     address_line1: string;
@@ -25,11 +27,6 @@ export const useReportSafetyStore = create<ReportSafetyStore>((set) => ({
     description: '',
     setDescription: (description: string) => set({ description }),
 
-    location: {
-        lat: 41.88,
-        lng: -87.62
-    },
-
     address: {
         address_line1: '',
         address_line2: '',
@@ -42,13 +39,21 @@ export const useReportSafetyStore = create<ReportSafetyStore>((set) => ({
 
     setAddress: (address: Address) => set({ address }),
 
-    setLocation: (location: { lat: number, lng: number }) => set({ location }),
+    setLocation: (location: { lat: number, lng: number } | undefined) => set({ location }),
 
     date: new Date(),
-    setDate: (date: Date) => set({ date }),
+    setDate: (date?: Date) => set({ date }),
+    time: undefined,
+    setTime: (time?: string) => set({ time }),
 
-    time: new Date(),
-    setTime: (time: Date) => set({ time })
+    typeOfIncidet: undefined,
+    setTypeOfIncident: (typeOfIncident?: TypeOfIncident) => set({ typeOfIncident }),
+    incidentIfOther: undefined,
+    setIncidentIfOther: (incidentIfOther?: string) => set({ incidentIfOther }),
+
+    setSeverity: (severity?: Severity) => set({ severity }),
+    additional_info: '',
+    setAdditionalInfo: (additional_info?: string) => set({ additional_info })
 }));
 
 export interface ReportSafetyStore {
@@ -64,7 +69,7 @@ export interface ReportSafetyStore {
     description: string;
     setDescription: (description: string) => void;
 
-    location: {
+    location?: {
         lat: number;
         lng: number;
     }
@@ -72,11 +77,22 @@ export interface ReportSafetyStore {
     address: Address
     setAddress: (address: Address) => void;
 
-    setLocation: (location: { lat: number, lng: number }) => void;
+    setLocation: (location: { lat: number, lng: number } | undefined) => void;
 
-    date: Date;
-    setDate: (date: Date) => void;
+    date?: Date;
+    setDate: (date?: Date) => void;
 
-    time: Date;
-    setTime: (time: Date) => void;
+    time?: string;
+    setTime: (time?: string) => void;
+
+    typeOfIncident?: TypeOfIncident;
+    setTypeOfIncident: (typeOfIncident?: TypeOfIncident) => void;
+    incidentIfOther?: string;
+    setIncidentIfOther: (incidentIfOther?: string) => void;
+
+    severity?: Severity;
+    setSeverity: (severity?: Severity) => void;
+
+    additional_info?: string;
+    setAdditionalInfo: (additional_info?: string) => void;
 }

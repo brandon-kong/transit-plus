@@ -44,7 +44,7 @@ const components: { title: string; href: string; description: string }[] = [
     },
     {
       title: "Safety Concern",
-      href: "report/safety",
+      href: "/report/safety",
       description:
         "Report a safety concern to help others safely plan their trips.",
     },
