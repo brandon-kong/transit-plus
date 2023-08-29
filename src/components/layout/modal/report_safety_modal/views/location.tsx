@@ -344,6 +344,8 @@ export default function ReportSafetyLocationView () {
                         country: '',
                         completed: false
                     })
+
+                    setMapPosition(userLocation || { lat: 41.88, lng: -87.62 })
                 }}
                     className="absolute bottom-4 left-4 z-10 pointer-events-auto"
                     >

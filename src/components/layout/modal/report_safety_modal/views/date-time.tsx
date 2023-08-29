@@ -28,23 +28,24 @@ export default function ReportSafetyDateTimeView () {
                 </TypographyH4>
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex gap-2">
                 <Calendar 
-                className="w-full m-auto"
+                className=""
                 mode="single"
                 selected={new Date(date as string)}
-                onSelect={(date) => setDate(date?.toISOString())}
+                onSelect={(date) => setDate(date?.toDateString())}
 
                 disabled={(date) =>
                     date > new Date() || date < new Date("1900-01-01")
                 }
                 />
 
-                <div>
+                <div className="w-full">
                     <InputWithLabel label="Time"
                     type="time"
                     placeholder="Time"
 
+                    className="w-full"
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
                     />
