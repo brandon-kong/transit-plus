@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 import GrayscaleCompany from '@/components/company-brand';
 
-import { motion, useMotionValue, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 export default function Home() {
     return (
         <main className={'h-[700px] flex flex-col w-full'} >
@@ -25,6 +25,7 @@ export default function Home() {
                         alt="Workflow"
                         height={10}
                         width={100}
+                        priority={true}
 
                         className={'absolute select-none bottom-0 w-full min-h-[20px] min-w-[100px] max-w-[120px] -z-10'}
                         /></TypographyH1>

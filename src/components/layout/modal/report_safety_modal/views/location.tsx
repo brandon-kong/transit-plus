@@ -76,7 +76,7 @@ export default function ReportSafetyLocationView () {
                 setIncidentMarker(marker)
             }
         }
-    }, [setLocation, setMapPosition, location, incidentMarker, setIncidentLocation, setIncidentMarker])
+    }, [setLocation, setMapPosition, location, incidentMarker, setIncidentLocation, setIncidentMarker, incidentLocation, map])
 
     const handleApiLoaded = (map: any, maps: any) => {
         setMap(map)
@@ -101,6 +101,8 @@ export default function ReportSafetyLocationView () {
         });
         bermudaTriangle.setMap(map);
       }
+
+      // exhaustive deps
 
       useEffect(() => {
         if (navigator.geolocation) {

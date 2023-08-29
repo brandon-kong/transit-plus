@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { Button } from "@/components/ui/button"
 
-import { useReportSafetyStore } from "@/lib/state/report_safety"
+import { NewFile, Severity, TypeOfIncident, useReportSafetyStore } from "@/lib/state/report_safety"
 import { TypographyH4, TypographyP } from "@/components/typography"
 
 import { DialogFooter } from "@/components/ui/dialog";
@@ -23,13 +23,18 @@ import { useSession } from "next-auth/react";
 import { BlackSpinner } from "@/components/spinner";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { createReport } from "@/lib/reports/util";
+import { useReportSafetyModal } from "@/lib/providers/modals/ReportSafetyModal/context";
 
 export default function ReportSafetyReviewView () {
 
     const { data: session, status } = useSession()
+    const { setOpen } = useReportSafetyModal()
     const router = useRouter()
     const { setOpen: setLoginModalOpen } = useLoginModal()
     
+    const setLoading = useReportSafetyStore((state) => state.setLoading)
+
     const setView = useReportSafetyStore((state) => state.setView)
     const date = useReportSafetyStore((state) => state.date)
     
@@ -37,6 +42,7 @@ export default function ReportSafetyReviewView () {
 
     const location = useReportSafetyStore((state) => state.location)
 
+    const address = useReportSafetyStore((state) => state.address)
 
     const confirmed = useReportSafetyStore((state) => state.confirmed)
     const setConfirmed = useReportSafetyStore((state) => state.setConfirmed)
@@ -48,6 +54,40 @@ export default function ReportSafetyReviewView () {
     const additionalDetails = useReportSafetyStore((state) => state.additional_info)
     const files = useReportSafetyStore((state) => state.files)
     
+    const clear = useReportSafetyStore((state) => state.clear)
+    
+    const attemptCreateReport = async () => {
+        setLoading(true)
+
+        const attempt = await createReport({
+            date_of_incident: date as string,
+            time_of_incident: time as string,
+
+            latitude: location?.lat as number,
+            longitude: location?.lng as number,
+
+            address: address,
+
+            type: typeOfIncident as TypeOfIncident,
+            incident_if_other: incidentIfOther,
+
+            severity: severity as Severity,
+            additional_info: additionalDetails,
+
+            files: files as NewFile[],
+        })
+
+        if (attempt.status_code === 201) {
+            clear();
+            setOpen(false)
+        }
+        else {
+            alert(JSON.stringify(attempt));
+        }
+
+        setLoading(false)
+    }
+
     return (
         <div className="flex flex-col gap-4 mt-4">
 
@@ -93,7 +133,7 @@ export default function ReportSafetyReviewView () {
                             disabled
                             label="Date"
                             type="date"
-                            value={date}
+                            value={date?.split('T')[0]}
                             />
                         </div>
 
@@ -287,7 +327,7 @@ export default function ReportSafetyReviewView () {
                 </Button>
 
                 <Button
-                onClick={() => setView('incident')}
+                onClick={attemptCreateReport}
                 disabled={!confirmed || status !== 'authenticated'}
                 >
                     Submit

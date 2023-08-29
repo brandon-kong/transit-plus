@@ -75,7 +75,7 @@ const ReportSafetyModal = ({ open, setOpen }: LoginModalContext) => {
             router.replace('/report/safety');
             setOpen(true);
         }
-    }, [pathname, searchParams]);
+    }, [pathname, searchParams, router, setOpen]);
     return (
         <Dialog open={open} onOpenChange={setOpen} >
             <DialogContent id="login-dialog" className="max-w-[650px] overflow-hidden border-none">

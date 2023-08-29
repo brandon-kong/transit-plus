@@ -33,7 +33,7 @@ export default function ReportSafetyDateTimeView () {
                 className=""
                 mode="single"
                 selected={new Date(date as string)}
-                onSelect={(date) => setDate(date?.toDateString())}
+                onSelect={(date) => setDate(date?.toISOString())}
 
                 disabled={(date) =>
                     date > new Date() || date < new Date("1900-01-01")

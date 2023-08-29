@@ -1,5 +1,8 @@
+import { Error, Success } from '@/types/response/types';
 import axios from 'axios';
 import { getSession } from 'next-auth/react';
+import { getServerSession } from "next-auth";
+import authOptions from '../next-auth/authOptions';
 
 const api = axios.create({
     baseURL: process.env.BACKEND_API_URL,
@@ -20,3 +23,28 @@ const localFetcherGet = async (url: string) => {
 };
 
 export { api, clientApi, localFetcherGet };
+
+export const AuthenticatedRequest = async (url: string, method: string, data: any) => {
+    const session = await getServerSession(authOptions);
+    const token = session?.user.access;
+
+    if (!token) {
+        const B: Error = {
+            status_code: 401,
+            error_type: 'invalid_token',
+            error_message: 'Invalid token',
+            detail: 'Invalid token',
+        }  
+
+        return B;
+    }
+
+    return api({
+        method: method,
+        url: url,
+        data: data,
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }).then(res => res.data as Success).catch(err => err.response.data as Error);
+}
