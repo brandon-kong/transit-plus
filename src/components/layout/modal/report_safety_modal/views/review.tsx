@@ -234,7 +234,7 @@ export default function ReportSafetyReviewView () {
                         {
                             status === 'unauthenticated' && (
                         
-                                <div className="flex flex-col gap-2">
+                                <div className="flex flex-col gap-4">
                                     <TypographyP className="text-sm">
                                         You must be logged in to submit a report. We use this information to help prevent abuse of the system.
                                     </TypographyP>

@@ -7,8 +7,11 @@ import { useLoginStore } from "@/lib/state/login"
 
 import { useLoginModal } from "@/lib/providers/modals/LoginModal/context"
 
+import { useSearchParams } from "next/navigation"
+
 export default function EmailLoginView () {
     
+    const searchParams = useSearchParams()
     const { setOpen } = useLoginModal()
 
     const setLoading = useLoginStore((state) => state.setLoading)
@@ -23,11 +26,15 @@ export default function EmailLoginView () {
         
         setLoading(true)
 
+        let callback = 'http://localhost:3000/'
+        if (searchParams.has('redirect')) {
+            callback = `http://localhost:3000/${searchParams.get('redirect') as string}`
+        }
         const verified = await signIn('email-password', {
             email,
             password,
 
-            callbackUrl: 'http://localhost:3000/'
+            callbackUrl: callback
         })
 
         if (!verified?.error) {

@@ -12,9 +12,11 @@ import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } fro
 import { useLoginModal } from "@/lib/providers/modals/LoginModal/context"
 import { useState, useEffect } from "react"
 import { Error } from "@/types/response/types"
+import { useSearchParams } from "next/navigation"
 
 export default function OTPVerifyView () {
     const { setOpen } = useLoginModal()
+    const searchParams = useSearchParams()
 
     const [canSendOTP, setCanSendOTP] = useState(false)
     const [secondsToResend, setSecondsToResend] = useState(30);
@@ -97,12 +99,16 @@ export default function OTPVerifyView () {
             if (detail.exists) {
                 // log them in
 
+                let callback = 'http://localhost:3000/'
+                if (searchParams.has('redirect')) {
+                    callback = `http://localhost:3000/${searchParams.get('redirect') as string}`
+                }
                 const signedIn = await signIn('phone-otp', {
                     phone,
                     token: otp,
                     country_code: countryCode,
 
-                    callbackUrl: 'http://localhost:3000/'
+                    callbackUrl: callback
                 })
 
                 if (!signedIn?.error) {

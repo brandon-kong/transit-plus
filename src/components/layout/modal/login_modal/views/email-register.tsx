@@ -8,7 +8,10 @@ import { registerUserWithEmail, registerUserWithPhone } from "@/lib/auth/util"
 
 import { useLoginModal } from "@/lib/providers/modals/LoginModal/context"
 
+import { useSearchParams } from "next/navigation"
+
 export default function EmailRegisterView () {
+    const searchParams = useSearchParams()
     const { setOpen } = useLoginModal()
 
     const setLoading = useLoginStore((state) => state.setLoading)
@@ -39,11 +42,16 @@ export default function EmailRegisterView () {
 
         if (registered.status_code === 201) {
             // sign in
+
+            let callback = 'http://localhost:3000/'
+            if (searchParams.has('redirect')) {
+                callback = `http://localhost:3000/${searchParams.get('redirect') as string}`
+            }
             const signedIn = await signIn('email-password', {
                 email,
                 password,
 
-                callbackUrl: 'http://localhost:3000/'
+                callbackUrl: callback
             })
 
             if (!signedIn?.error) {

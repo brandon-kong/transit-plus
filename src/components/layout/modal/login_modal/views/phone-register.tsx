@@ -8,7 +8,10 @@ import { registerUserWithPhone } from "@/lib/auth/util"
 
 import { useLoginModal } from "@/lib/providers/modals/LoginModal/context"
 
+import { useSearchParams } from "next/navigation"
+
 export default function PhoneRegisterView () {
+    const searchParams = useSearchParams()
     const { setOpen } = useLoginModal()
 
     const setLoading = useLoginStore((state) => state.setLoading)
@@ -40,12 +43,17 @@ export default function PhoneRegisterView () {
 
         if (registered.status_code === 201) {
             // sign in
+
+            let callback = 'http://localhost:3000/'
+            if (searchParams.has('redirect')) {
+                callback = `http://localhost:3000/${searchParams.get('redirect') as string}`
+            }
             const signedIn = await signIn('phone-otp', {
                 phone,
                 token: otp,
                 country_code: countryCode,
 
-                callbackUrl: 'http://localhost:3000/'
+                callbackUrl: callback
             })
 
             if (!signedIn?.error) {
