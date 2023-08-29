@@ -4,7 +4,12 @@ export type ReportCreateData = {
     latitude: number;
     longitude: number;
 
-    address: Address;
+    address_line_1: string;
+    address_line_2: string;
+    city: string;
+    region: string;
+    postal_code: string;
+    country: string;
 
     date_of_incident: string;
     time_of_incident: string;

@@ -148,11 +148,7 @@ const authOptions: NextAuthOptions = {
             }
 
             if (decodedRefresh.exp * 1000 < Date.now()) {
-                return {
-                    ...token,
-                    error: 'Refresh token expired',
-                    exp: 0,
-                };
+                return null;
             }
 
             const newToken = await refreshToken(token);
@@ -166,9 +162,14 @@ const authOptions: NextAuthOptions = {
         },
 
         async session({ session, token, user }: SessionCallbackParams): Promise<any> {
+            if (!token) {
+                return null;
+            }
+            
             session.access = token.access;
             session.refresh = token.refresh;
             session.error = token.error;
+            
 
             session.user = token.user;
             return session;

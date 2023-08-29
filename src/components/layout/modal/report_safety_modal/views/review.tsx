@@ -66,7 +66,12 @@ export default function ReportSafetyReviewView () {
             latitude: location?.lat as number,
             longitude: location?.lng as number,
 
-            address: address,
+            address_line_1: address.address_line1,
+            address_line_2: address.address_line2,
+            city: address.city,
+            region: address.region,
+            postal_code: address.zip,
+            country: address.country,
 
             type: typeOfIncident as TypeOfIncident,
             incident_if_other: incidentIfOther,
