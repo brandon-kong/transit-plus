@@ -13,10 +13,20 @@ import { TypographyP } from "@/components/typography";
 
 import usePlacesService from 'react-google-autocomplete/lib/usePlacesAutocompleteService';
 import { BlackSpinner } from "@/components/spinner";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea as ShadTextarea } from "@/components/ui/textarea";
 
 export const Input = ({ className, ...props }: React.ComponentPropsWithoutRef<typeof ShadInput>) => (
     <ShadInput
+        className={cn(
+            "bg-gray-100 focus:bg-white transition-all placeholder:text-gray-400 h-12",
+            className
+        )}
+        {...props}
+    />
+)
+
+export const Textarea = ({ className, ...props }: React.ComponentPropsWithoutRef<typeof ShadTextarea>) => (
+    <ShadTextarea
         className={cn(
             "bg-gray-100 focus:bg-white transition-all placeholder:text-gray-400 h-12",
             className
@@ -38,7 +48,7 @@ export const InputWithLabel = ({ label, className, ...props }: {
 export const TextareaWithLabel = ({ label, className, ...props }: {
     label: string;
     className?: string;
-} & React.ComponentPropsWithoutRef<typeof Textarea>) => (
+} & React.ComponentPropsWithoutRef<typeof ShadTextarea>) => (
     <div className={cn("flex flex-col gap-2")}>
         <Label className="text-gray-500 text-xs ml-2 select-none">{label}</Label>
         <Textarea className={className} {...props} />

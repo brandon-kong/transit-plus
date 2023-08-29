@@ -6,12 +6,19 @@ import { signIn } from "next-auth/react"
 
 import { useLoginStore } from "@/lib/state/login"
 import { sendPhoneOTP, userExistsWithEmail } from "@/lib/auth/util"
-import { useState } from "react"
+import { usePathname, useSearchParams } from "next/navigation"
 
 export default function LoginModalLoginView () {
+    const searchparams = useSearchParams()
+    
     const signInWithGoogle = () => {
         // TODO: callback url should be dynamic
+        
 
+        if (searchparams.get('redirect')) {
+            signIn('google', { callbackUrl: `http://localhost:3000/${searchparams.get('redirect')}` })
+            return;
+        }
         signIn('google', { callbackUrl: 'http://localhost:3000/' })
     }
 

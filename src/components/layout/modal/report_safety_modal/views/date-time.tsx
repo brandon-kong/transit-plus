@@ -32,8 +32,8 @@ export default function ReportSafetyDateTimeView () {
                 <Calendar 
                 className="w-full m-auto"
                 mode="single"
-                selected={date}
-                onSelect={(date) => setDate(date)}
+                selected={new Date(date as string)}
+                onSelect={(date) => setDate(date?.toISOString())}
 
                 disabled={(date) =>
                     date > new Date() || date < new Date("1900-01-01")

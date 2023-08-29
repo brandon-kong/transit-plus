@@ -17,7 +17,7 @@ type IncidentType = {
     description: string
 }
 
-const IncidentTypes: IncidentType[] = [
+export const IncidentTypes: IncidentType[] = [
     {
         title: 'Harassment / Inappropriate Behaviour',
         description: 'This includes verbal or physical harassment, sexual harassment, or any other inappropriate behaviour.'

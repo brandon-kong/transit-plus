@@ -1,8 +1,14 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-export type View = 'location' | 'date-time' | 'incident' | 'severity'
+export type View = 'location' | 'date-time' | 'incident' | 'severity' | 'review'
 export type TypeOfIncident = 'Harassment / Inappropriate Behaviour' | 'Suspicious activity / Unattended Baggage' | 'Vandalism / Damages' | 'Health / Medical Emergency' | 'Safety Hazard / Dangerous Situation' | 'Other';
 export type Severity = 'Low' | 'Medium' | 'High';
+
+export type NewFile ={
+    url: string;
+    name: string;
+}
 
 export type Address = {
     address_line1: string;
@@ -14,47 +20,60 @@ export type Address = {
     completed: boolean;
 }
 
-export const useReportSafetyStore = create<ReportSafetyStore>((set) => ({
-    loading: false,
-    setLoading: (loading: boolean) => set({ loading }),
+export const useReportSafetyStore = create(
+    persist<ReportSafetyStore>(
+      (set) => ({
+        loading: false,
+        setLoading: (loading: boolean) => set({ loading }),
 
-    view: 'location' as View,
-    setView: (view: View) => set({ view }),
+        view: 'location' as View,
+        setView: (view: View) => set({ view }),
 
-    title: '',
-    setTitle: (title: string) => set({ title }),
+        title: '',
+        setTitle: (title: string) => set({ title }),
 
-    description: '',
-    setDescription: (description: string) => set({ description }),
+        description: '',
+        setDescription: (description: string) => set({ description }),
 
-    address: {
-        address_line1: '',
-        address_line2: '',
-        city: '',
-        region: '',
-        zip: '',
-        country: '',
-        completed: false
-    },
+        address: {
+            address_line1: '',
+            address_line2: '',
+            city: '',
+            region: '',
+            zip: '',
+            country: '',
+            completed: false
+        },
 
-    setAddress: (address: Address) => set({ address }),
+        setAddress: (address: Address) => set({ address }),
 
-    setLocation: (location: { lat: number, lng: number } | undefined) => set({ location }),
+        setLocation: (location: { lat: number, lng: number } | undefined) => set({ location }),
 
-    date: new Date(),
-    setDate: (date?: Date) => set({ date }),
-    time: undefined,
-    setTime: (time?: string) => set({ time }),
+        date: new Date().toISOString().split('T')[0],
+        setDate: (date?: string) => set({ date }),
+        time: undefined,
+        setTime: (time?: string) => set({ time }),
 
-    typeOfIncidet: undefined,
-    setTypeOfIncident: (typeOfIncident?: TypeOfIncident) => set({ typeOfIncident }),
-    incidentIfOther: undefined,
-    setIncidentIfOther: (incidentIfOther?: string) => set({ incidentIfOther }),
+        typeOfIncidet: undefined,
+        setTypeOfIncident: (typeOfIncident?: TypeOfIncident) => set({ typeOfIncident }),
+        incidentIfOther: undefined,
+        setIncidentIfOther: (incidentIfOther?: string) => set({ incidentIfOther }),
 
-    setSeverity: (severity?: Severity) => set({ severity }),
-    additional_info: '',
-    setAdditionalInfo: (additional_info?: string) => set({ additional_info })
-}));
+        setSeverity: (severity?: Severity) => set({ severity }),
+        additional_info: '',
+        setAdditionalInfo: (additional_info?: string) => set({ additional_info }),
+
+        files: [],
+        setFiles: (files?: NewFile[]) => set({ files }),
+
+        confirmed: false,
+        setConfirmed: (confirmed: boolean) => set({ confirmed })
+      }),
+      {
+        name: 'transit+-last-report-safety', // name of the item in the storage (must be unique)
+      }
+    )
+  )
 
 export interface ReportSafetyStore {
     loading: boolean;
@@ -79,8 +98,8 @@ export interface ReportSafetyStore {
 
     setLocation: (location: { lat: number, lng: number } | undefined) => void;
 
-    date?: Date;
-    setDate: (date?: Date) => void;
+    date?: string;
+    setDate: (date?: string) => void;
 
     time?: string;
     setTime: (time?: string) => void;
@@ -95,4 +114,10 @@ export interface ReportSafetyStore {
 
     additional_info?: string;
     setAdditionalInfo: (additional_info?: string) => void;
+
+    files: NewFile[];
+    setFiles: (files?: NewFile[]) => void;
+
+    confirmed: boolean;
+    setConfirmed: (confirmed: boolean) => void;
 }

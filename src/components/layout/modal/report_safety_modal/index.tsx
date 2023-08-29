@@ -10,7 +10,7 @@ import {
     DialogHeader,
 } from "@/components/ui/dialog";
 
-import { TypographyH3, TypographyP } from "@/components/typography";
+import { TypographyH3 } from "@/components/typography";
 import { LoginModalContext } from "@/lib/providers/modals/LoginModal/context";
 import { BackButton, CloseButton } from "@/components/input/buttons";
 
@@ -20,29 +20,42 @@ import ReportSafetyLocationView from "./views/location";
 import ReportSafetyDateTimeView from "./views/date-time";
 import ReportSafetyIncidentView from "./views/incident";
 import ReportSafetySeverityView from "./views/severity";
+import ReportSafetyReviewView from "./views/review";
 
 import { BlackSpinner } from "@/components/spinner";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const ReportSafetyStates: { [key: string]: any } = {
     'location': {
         title: 'Report Safety Concern',
         description: 'Thank you for helping us make transit safer for everyone.',
-        view: <ReportSafetyLocationView />
+        view: <ReportSafetyLocationView />,
+        progress: 'w-[20%]'
     },
     'date-time': {
         title: 'Report Safety Concern',
         description: 'You don\'t have to be exact, but please provide as much detail as possible.',
-        view: <ReportSafetyDateTimeView />
+        view: <ReportSafetyDateTimeView />,
+        progress: 'w-[40%]'
     },
     'incident': {
         title: 'Report Safety Concern',
         description: 'What type of incident did you witness?',
-        view: <ReportSafetyIncidentView />
+        view: <ReportSafetyIncidentView />,
+        progress: 'w-[60%]'
     },
     'severity': {
         title: 'Report Safety Concern',
         description: 'Thank you for helping us make transit safer for everyone.',
-        view: <ReportSafetySeverityView />
+        view: <ReportSafetySeverityView />,
+        progress: 'w-[80%]'
+    },
+    'review': {
+        title: 'Report Safety Concern',
+        description: 'Thank you for helping us make transit safer for everyone.',
+        view: <ReportSafetyReviewView />,
+        progress: 'w-[90%]'
     },
 }
 
@@ -51,6 +64,18 @@ const ReportSafetyModal = ({ open, setOpen }: LoginModalContext) => {
     const setView = useReportSafetyStore((state) => state.setView);
     const loading = useReportSafetyStore((state) => state.loading);
 
+    const progress = ReportSafetyStates[view] && ReportSafetyStates[view].progress;
+
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        if (pathname === '/report/safety' && searchParams.has('open')) {
+            router.replace('/report/safety');
+            setOpen(true);
+        }
+    }, [pathname, searchParams]);
     return (
         <Dialog open={open} onOpenChange={setOpen} >
             <DialogContent id="login-dialog" className="max-w-[650px] overflow-hidden border-none">
@@ -97,6 +122,11 @@ const ReportSafetyModal = ({ open, setOpen }: LoginModalContext) => {
                 {
                     ReportSafetyStates[view] && ReportSafetyStates[view].view
                 }
+
+
+                
+                <div className={`absolute bottom-0 left-0 border-black border-2 ${progress} transition-all`}>
+                </div>
             </DialogContent>
         </Dialog>
     )

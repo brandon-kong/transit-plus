@@ -290,7 +290,7 @@ export default function ReportSafetyLocationView () {
             
 
                 <div
-                className="h-96 w-full rounded-xl overflow-hidden relative"
+                className="h-[300px] md:h-96 w-full rounded-xl overflow-hidden relative"
                 >
                     <GoogleMapReact
                     yesIWantToUseGoogleMapApiInternals
