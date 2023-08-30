@@ -55,6 +55,20 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        lochinvar: {
+          '50': '#f3faf8',
+          '100': '#d6f1e7',
+          '200': '#ace3d0',
+          '300': '#7bcdb5',
+          '400': '#50b198',
+          '500': '#35927b',
+          '600': '#297866',
+          '700': '#256054',
+          '800': '#214e45',
+          '900': '#1f423a',
+          '950': '#0d2622',
+      },
+      
       },
       borderRadius: {
         lg: "var(--radius)",

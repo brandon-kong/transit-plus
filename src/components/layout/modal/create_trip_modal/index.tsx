@@ -14,65 +14,58 @@ import { TypographyH3 } from "@/components/typography";
 import { LoginModalContext } from "@/lib/providers/modals/LoginModal/context";
 import { BackButton, CloseButton } from "@/components/input/buttons";
 
-import { useReportSafetyStore } from "@/lib/state/report_safety";
+import { useCreateTripStore } from "@/lib/state/create_trip";
 
-import ReportSafetyLocationView from "./views/location";
-import ReportSafetyDateTimeView from "./views/date-time";
-import ReportSafetyIncidentView from "./views/incident";
-import ReportSafetySeverityView from "./views/severity";
-import ReportSafetyReviewView from "./views/review";
+import CreateTripStartingPointView from "./views/starting_location";
+import CreateTripEndingPointView from "./views/ending-location";
+import CreateTripTransportationView from "./views/transportation";
+import CreateTripTrainInfoView from "./views/train-info";
 
 import { BlackSpinner } from "@/components/spinner";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const ReportSafetyStates: { [key: string]: any } = {
-    'location': {
+const CreateTripStates: { [key: string]: any } = {
+    'starting-point': {
         title: 'Report Safety Concern',
         description: 'Thank you for helping us make transit safer for everyone.',
-        view: <ReportSafetyLocationView />,
+        view: <CreateTripStartingPointView />,
+        progress: 'w-[10%]'
+    },
+    'destination': {
+        title: 'Report Safety Concern',
+        description: 'Thank you for helping us make transit safer for everyone.',
+        view: <CreateTripEndingPointView />,
         progress: 'w-[20%]'
     },
-    'date-time': {
-        title: 'Report Safety Concern',
-        description: 'You don\'t have to be exact, but please provide as much detail as possible.',
-        view: <ReportSafetyDateTimeView />,
-        progress: 'w-[40%]'
-    },
-    'incident': {
-        title: 'Report Safety Concern',
-        description: 'What type of incident did you witness?',
-        view: <ReportSafetyIncidentView />,
-        progress: 'w-[60%]'
-    },
-    'severity': {
+    'transportation': {
         title: 'Report Safety Concern',
         description: 'Thank you for helping us make transit safer for everyone.',
-        view: <ReportSafetySeverityView />,
-        progress: 'w-[80%]'
+        view: <CreateTripTransportationView />,
+        progress: 'w-[50%]'
     },
-    'review': {
+    'train-info': {
         title: 'Report Safety Concern',
         description: 'Thank you for helping us make transit safer for everyone.',
-        view: <ReportSafetyReviewView />,
-        progress: 'w-[90%]'
+        view: <CreateTripTrainInfoView />,
+        progress: 'w-[70%]'
     },
 }
 
-const ReportSafetyModal = ({ open, setOpen }: LoginModalContext) => {
-    const view = useReportSafetyStore((state) => state.view);
-    const setView = useReportSafetyStore((state) => state.setView);
-    const loading = useReportSafetyStore((state) => state.loading);
+const CreateTripModal = ({ open, setOpen }: LoginModalContext) => {
+    const view = useCreateTripStore((state) => state.view);
+    const setView = useCreateTripStore((state) => state.setView);
+    const loading = useCreateTripStore((state) => state.loading);
 
-    const progress = ReportSafetyStates[view] && ReportSafetyStates[view].progress;
+    const progress = CreateTripStates[view] && CreateTripStates[view].progress;
 
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
     useEffect(() => {
-        if (pathname === '/report/safety' && searchParams.has('open')) {
-            router.replace('/report/safety');
+        if (pathname === '/plan' && searchParams.has('open')) {
+            router.replace('/plan');
             setOpen(true);
         }
     }, [pathname, searchParams, router, setOpen]);
@@ -83,7 +76,7 @@ const ReportSafetyModal = ({ open, setOpen }: LoginModalContext) => {
                 <DialogHeader className="z-20">
 
                     {
-                        view === 'location' ? (
+                        view === 'starting-point' ? (
                         <>
                             <Image
                             src={'/brand/transit-logo.png'}
@@ -100,7 +93,7 @@ const ReportSafetyModal = ({ open, setOpen }: LoginModalContext) => {
                             />
                         </>
                         
-                        ) : <BackButton onClick={() => setView('location')} className="z-20"/>
+                        ) : <BackButton onClick={() => setView('starting-point')} className="z-20"/>
                     }
 
                     {
@@ -112,22 +105,22 @@ const ReportSafetyModal = ({ open, setOpen }: LoginModalContext) => {
                     }
                     
                     {
-                        view === 'location' && (
+                        view === 'starting-point' && (
                             <>
-                            <TypographyH3>
-                                {ReportSafetyStates[view] && ReportSafetyStates[view].title}
-                            </TypographyH3>
-                            <DialogDescription className="z-20">
-                                {ReportSafetyStates[view] && ReportSafetyStates[view].description}
-                            </DialogDescription>
+                                <TypographyH3>
+                                    New trip, new adventure!
+                                </TypographyH3>
+                                <DialogDescription className="z-20">
+                                    You can create a reoccurring trip or a one-time trip; it's up to you! E.g. You can create a trip for your daily commute to work or a fun, little getaway to the beach.
+                                </DialogDescription>
                             </>
                         )
                     }
-                    
+                   
                     
                 </DialogHeader>
                 {
-                    ReportSafetyStates[view] && ReportSafetyStates[view].view
+                    CreateTripStates[view] && CreateTripStates[view].view
                 }
 
 
@@ -139,4 +132,4 @@ const ReportSafetyModal = ({ open, setOpen }: LoginModalContext) => {
     )
 };
 
-export default ReportSafetyModal;
+export default CreateTripModal;

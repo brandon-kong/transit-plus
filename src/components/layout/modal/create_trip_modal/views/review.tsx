@@ -11,7 +11,7 @@ import { Calendar } from "@/components/ui/calendar";
 import GoogleMapReact from "google-map-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
-import { IncidentTypes } from "./incident";
+import { IncidentTypes } from "./transportation";
 import { useLoginModal } from "@/lib/providers/modals/LoginModal/context";
 import { useRouter } from "next/navigation";
 
@@ -96,7 +96,7 @@ export default function ReportSafetyReviewView () {
     return (
         <div className="flex flex-col gap-4 mt-4">
 
-            <ScrollArea className={'max-h-[400px] sm:max-h-[500px]'}>
+            <ScrollArea className={'max-h-[200px] md:max-h-[500px]'}>
                 <div className="flex flex-col gap-4 px-4 py-2 pb-48">
                     
                 <div className="flex flex-col justify-between">

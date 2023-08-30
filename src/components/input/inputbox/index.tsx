@@ -274,6 +274,10 @@ export const MapSearchOverlay = ({ onChange }: {
                 
             </div>
 
+            <div className="relative w-full z-10">
+                <div className="absolute top-0 left-0 w-full">
+
+                
             {showSuggestions && 
             (
 
@@ -346,6 +350,8 @@ export const MapSearchOverlay = ({ onChange }: {
                     </div>
                 )
             }
+                </div>
+            </div>
 
             
         </div>

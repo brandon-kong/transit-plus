@@ -22,13 +22,13 @@ export default function ReportSafetyDateTimeView () {
     return (
         <div className="flex flex-col gap-4 mt-4">
 
-            <div className="flex justify-center sm:justify-between">
+            <div className="flex justify-between">
                 <TypographyH4>
                     When did this happen?
                 </TypographyH4>
             </div>
 
-            <div className="flex gap-2 flex-col sm:flex-row">
+            <div className="flex gap-2">
                 <Calendar 
                 className=""
                 mode="single"
