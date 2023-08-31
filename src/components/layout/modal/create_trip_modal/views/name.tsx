@@ -2,33 +2,88 @@ import { useState, useEffect, useCallback } from "react";
 
 import { Button } from "@/components/ui/button"
 
-import { Address, useReportSafetyStore } from "@/lib/state/report_safety"
 import { TypographyH4, TypographyP } from "@/components/typography"
 
-import GoogleMapReact, { Coords } from 'google-map-react';
+import { useCreateTripModal } from "@/lib/providers/modals/CreateTripModal/context";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input, InputWithLabel, MapSearchOverlay, } from "@/components/input/inputbox";
 import { useCreateTripStore } from "@/lib/state/create_trip";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+import { DumpedAddress, TripCreateData } from "@/types/trips/types";
+import { Address } from "@/lib/state/report_safety";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useLoginModal } from "@/lib/providers/modals/LoginModal/context";
 import { BlackSpinner } from "@/components/spinner";
+import { createTrip } from "@/lib/trips/util";
 
 export default function CreateTripNameView () {
 
     const { data: session, status } = useSession()
     const router = useRouter()
     const { setOpen: setLoginModalOpen } = useLoginModal()
+    const { setOpen } = useCreateTripModal()
 
     const setView = useCreateTripStore((state) => state.setView)
         
     const name = useCreateTripStore((state) => state.name)
     const setName = useCreateTripStore((state) => state.setName)
 
-    const attemptCreateTrip = (e: any) => {
+    const startingPoint = useCreateTripStore((state) => state.starting_point)
+    const destination = useCreateTripStore((state) => state.destination)
+
+    const typeOfTransportation = useCreateTripStore((state) => state.typeOfTransportation)
+
+    const setLoading = useCreateTripStore((state) => state.setLoading)
+    const clear = useCreateTripStore((state) => state.clear)
+
+    const attemptCreateTrip = async (e: any) => {
         e.preventDefault()
+
+        setLoading(true)
+
+        const newLocation: DumpedAddress[] = []
+
+        // TODO: Fix this, this is a hack
+
+        newLocation.push({
+            ...startingPoint,
+            address_line_1: startingPoint.address?.address_line1 as string,
+            address_line_2: startingPoint.address?.address_line2 as string,
+            ...startingPoint.address as Address,
+            latitude: startingPoint.lat,
+            longitude: startingPoint.lng,
+        })
+
+        newLocation.push({
+            ...destination,
+            address_line_1: destination.address?.address_line1 as string,
+            address_line_2: destination.address?.address_line2 as string,
+            ...destination.address as Address,
+            latitude: destination.lat,
+            longitude: destination.lng,
+        })
+
+        const data: TripCreateData = {
+            name,
+            locations: newLocation,
+            type_of_transportation: typeOfTransportation,
+        }
+
+        const created = await createTrip(data);
+
+        if (created.status_code === 201) {
+            setOpen(false)
+            clear()
+        }
+
+        else {
+            // TODO: Handle error
+        }
+
+
+        setLoading(false)
     }
 
     return (
@@ -91,7 +146,7 @@ export default function CreateTripNameView () {
                 </Button>
                 <Button
                 disabled={!name || status !== 'authenticated'}
-                onClick={() => setView('destination')}
+                onClick={attemptCreateTrip}
                 >
                     Continue
                 </Button>
