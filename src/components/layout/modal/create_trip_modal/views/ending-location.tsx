@@ -23,7 +23,7 @@ export default function CreateTripEndingPointView () {
             <form className="flex flex-col gap-4 p-4">
                 <div className="flex justify-between">
                     <TypographyH4>
-                        First things first, where are you starting?
+                        What&apos;s the destination?
                     </TypographyH4>
                 </div>
                 <div>

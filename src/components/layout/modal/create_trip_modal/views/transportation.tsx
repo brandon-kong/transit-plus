@@ -89,7 +89,7 @@ export default function CreateTripTransportationView () {
 
                 <Button
                 disabled={!typeOfTransportation}
-                onClick={() => setView(typeOfTransportation === 'CTA Train' ? 'train-info' : 'date-time')}
+                onClick={() => setView('name')}
                 >
                     Continue
                 </Button>

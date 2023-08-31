@@ -20,6 +20,7 @@ import CreateTripStartingPointView from "./views/starting_location";
 import CreateTripEndingPointView from "./views/ending-location";
 import CreateTripTransportationView from "./views/transportation";
 import CreateTripTrainInfoView from "./views/train-info";
+import CreateTripNameView from "./views/name";
 
 import { BlackSpinner } from "@/components/spinner";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
@@ -49,6 +50,12 @@ const CreateTripStates: { [key: string]: any } = {
         description: 'Thank you for helping us make transit safer for everyone.',
         view: <CreateTripTrainInfoView />,
         progress: 'w-[70%]'
+    },
+    'name': {
+        title: 'Report Safety Concern',
+        description: 'Thank you for helping us make transit safer for everyone.',
+        view: <CreateTripNameView />,
+        progress: 'w-[90%]'
     },
 }
 
@@ -111,7 +118,7 @@ const CreateTripModal = ({ open, setOpen }: LoginModalContext) => {
                                     New trip, new adventure!
                                 </TypographyH3>
                                 <DialogDescription className="z-20">
-                                    You can create a reoccurring trip or a one-time trip; it's up to you! E.g. You can create a trip for your daily commute to work or a fun, little getaway to the beach.
+                                    You can create a reoccurring trip or a one-time trip; it&apos;s up to you! E.g. You can create a trip for your daily commute to work or a fun, little getaway to the beach.
                                 </DialogDescription>
                             </>
                         )

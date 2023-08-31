@@ -21,7 +21,15 @@ import { CTATrainLines, CTATrainStation } from "@/types/geometry/types";
 type TrainLineTypes = { [key: string]: string }
 
 export const CTATrainLineTypes: TrainLineTypes = {
-    'Red Line': 'bg-[#c60c30] text-white',
+    'Red Line': 'bg-[#c60c30] text-white hover',
+    'Blue Line': 'bg-[#00a1de] text-white',
+    'Brown Line': 'bg-[#62361b] text-white',
+    'Green Line': 'bg-[#009b3a] text-white',
+    'Orange Line': 'bg-[#f9461c] text-white',
+    'Pink Line': 'bg-[#e27ea6] text-white',
+    'Purple Line': 'bg-[#522398] text-white',
+    'Yellow Line': 'bg-[#f9e300] text-black',
+    
 }
 
 export default function CreateTripTrainInfoView () {
@@ -32,6 +40,7 @@ export default function CreateTripTrainInfoView () {
     
     const setLoading = useCreateTripStore((state) => state.setLoading)
     
+    const destination = useCreateTripStore((state) => state.destination)
     const startingPoint = useCreateTripStore((state) => state.starting_point)
     const closestStation = useCreateTripStore((state) => state.closestStation)
     const setClosestStation = useCreateTripStore((state) => state.setClosestStation)
@@ -40,7 +49,7 @@ export default function CreateTripTrainInfoView () {
         if (!closestStation) {
             setLoading(true)
             
-            getClosestStation(startingPoint.lat, startingPoint.lng)
+            getClosestStation(startingPoint.lat, startingPoint.lng, destination.lat, destination.lng)
             .then((data: Success | Error) => {
                 const detail = data.detail as unknown as { closest_stop: CTATrainStation }
                 setClosestStation(detail.closest_stop)
@@ -65,17 +74,27 @@ export default function CreateTripTrainInfoView () {
 
             <ScrollArea className="max-h-[300px] md:max-h-[500px] h-full">
                 
-                <div className="w-full gap-4 p-4 pl-4">
+                <div className="w-full gap-4 p-4 pl-4 gap flex flex-col">
                 
-                <div className="flex flex-col gap-2">
-                    <TypographyP className="text-sm font-semibold text-left w-full">
-                        Suggested Station
-                    </TypographyP>
+                    <div className="flex flex-col gap-2">
+                        <TypographyP className="text-sm font-semibold text-left w-full">
+                            Suggested Station
+                        </TypographyP>
 
-                    <div className={`${CTATrainLineTypes[closestStation?.line as string] || 'bg-gray-100'} p-4 w-full flex items-center justify-center rounded-lg`}>
-                        { closestStation?.name }
+                        <div className={`${CTATrainLineTypes[closestStation?.line as string] || 'bg-gray-100'} p-4 w-full flex items-center justify-center rounded-lg`}>
+                            { closestStation?.name }
+                        </div>
                     </div>
-                </div>
+
+                    <div className="grid grid-cols-2 gap-2">
+                        { Object.keys(CTATrainLineTypes).map((line) => {
+                            return (
+                                <div key={line} className={`${CTATrainLineTypes[line]} p-4 w-full flex items-center justify-center rounded-lg`}>
+                                    { line }
+                                </div>
+                            )
+                        }) }
+                    </div>
                 
                     
                 </div>

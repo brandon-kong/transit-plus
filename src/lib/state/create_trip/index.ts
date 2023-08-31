@@ -1,11 +1,12 @@
 import { create } from 'zustand';
-import { Address } from '../report_safety';
-import { CTATrainLines, CTATrainStation, GeometryPointWithAddress } from '@/types/geometry/types';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
-export type View = 'starting-point' | 'destination' | 'date-time' | 'transportation' | 'train-info'
+import { CTATrainStation, GeometryPointWithAddress } from '@/types/geometry/types';
+
+export type View = 'starting-point' | 'destination' | 'date-time' | 'transportation' | 'train-info' | 'name'
 export type Transportation = 'Car' | 'Bus' | 'CTA Train' | 'Bicycle' | 'Walk'  | 'Boat' | 'Plane'
 
-export const useCreateTripStore = create<CreateTripState>((set) => ({
+const initial = (set: any) => ({
     loading: false,
     setLoading: (loading: boolean) => set({ loading }),
 
@@ -20,7 +21,7 @@ export const useCreateTripStore = create<CreateTripState>((set) => ({
     
     setStartingPoint: (starting_point: GeometryPointWithAddress) => set({ starting_point }),
 
-    setClosestStation: (closestStation: CTATrainStation) => set({ closestStation }),
+    setClosestStation: (closestStation?: CTATrainStation) => set({ closestStation }),
     
     destination: {
         name: '',
@@ -32,7 +33,20 @@ export const useCreateTripStore = create<CreateTripState>((set) => ({
     typeOfTransportation: 'Car' as Transportation,
     setTypeOfTransportation: (typeOfTransportation: Transportation) => set({ typeOfTransportation }),
 
-}));
+    name : '',
+    setName: (name: string) => set({ name }),
+});
+
+export const useCreateTripStore = create( 
+    persist<CreateTripState>
+    (
+        (set) => (initial(set)),
+        {
+            name: 'transit+-last-create-trip',
+            storage: createJSONStorage(() => sessionStorage)
+        }
+    )
+);
 
 export interface CreateTripState {
     loading: boolean;
@@ -53,4 +67,7 @@ export interface CreateTripState {
 
     typeOfTransportation: Transportation;
     setTypeOfTransportation: (typeOfTransportation: Transportation) => void;
+
+    name: string;
+    setName: (name: string) => void;
 }
