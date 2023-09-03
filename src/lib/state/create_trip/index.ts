@@ -4,7 +4,9 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { CTATrainStation, GeometryPointWithAddress } from '@/types/geometry/types';
 import { Address } from '@/types/trips/types';
 
-export type View = 'starting-point' | 'destination' | 'date-time' | 'transportation' | 'train-info' | 'name'
+export type DaysOfWeek = 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday'
+export type Frequency = 'Never' | 'Weekly' | 'Biweekly' | 'Monthly' | 'Bimonthly'
+export type View = 'starting-point' | 'destination' | 'date-time' | 'transportation' | 'train-info' | 'name' | 'frequency'
 export type Transportation = 'Car' | 'Bus' | 'CTA Train' | 'Bicycle' | 'Walk'  | 'Boat' | 'Plane'
 
 const initial = (set: any) => ({
@@ -38,6 +40,12 @@ const initial = (set: any) => ({
 
     name : '',
     setName: (name: string) => set({ name }),
+
+    daysOfWeek: [],
+    setDaysOfWeek: (daysOfWeek: DaysOfWeek[]) => set({ daysOfWeek }),
+
+    frequency: 'Never' as Frequency,
+    setFrequency: (frequency: Frequency) => set({ frequency }),
 
     clear: () => set(initial(set))
 });
@@ -75,6 +83,12 @@ export interface CreateTripState {
 
     name: string;
     setName: (name: string) => void;
+
+    daysOfWeek: DaysOfWeek[];
+    setDaysOfWeek: (days: DaysOfWeek[]) => void;
+
+    frequency: Frequency;
+    setFrequency: (frequency: Frequency) => void;
 
     clear: () => void;
 }

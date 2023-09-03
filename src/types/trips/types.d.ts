@@ -1,4 +1,4 @@
-import type { Transportation } from "@/lib/state/create_trip";
+import type { DaysOfWeek, Frequency, Transportation } from "@/lib/state/create_trip";
 import { GeometryPointWithAddress } from "../geometry/types";
 
 export interface Address extends GeometryPointWithAddress {
@@ -25,6 +25,9 @@ export type TripCreateData = {
 
     name: string;
     locations: DumpedAddress[];
+
+    days: DaysOfWeek[];
+    weeks_to_repeat: Frequency;
 
     type_of_transportation: Transportation;
 

@@ -72,7 +72,7 @@ export default function Navbar () {
     const { data: session, status } = useSession();
 
     return (
-        <div className=" px-8 lg:px-[80px] flex justify-between items-center h-16 bg-white text-black relative" role="navigation">
+        <div className=" px-8 md:px-[80px] lg:px-[50px] flex justify-between items-center h-16 bg-white text-black relative" role="navigation">
             <div className="flex items-center">
                 <div className="flex-shrink-0 flex items-center">
                     <Link href="/">

@@ -35,6 +35,9 @@ export default function CreateTripNameView () {
 
     const typeOfTransportation = useCreateTripStore((state) => state.typeOfTransportation)
 
+    const daysOfWeek = useCreateTripStore((state) => state.daysOfWeek);
+    const frequency = useCreateTripStore((state) => state.frequency);
+
     const setLoading = useCreateTripStore((state) => state.setLoading)
     const clear = useCreateTripStore((state) => state.clear)
 
@@ -69,6 +72,9 @@ export default function CreateTripNameView () {
             name,
             locations: newLocation,
             type_of_transportation: typeOfTransportation,
+
+            days: daysOfWeek,
+            weeks_to_repeat: frequency
         }
 
         const created = await createTrip(data);
@@ -140,7 +146,7 @@ export default function CreateTripNameView () {
             <DialogFooter>
                 <Button
                 variant={'outline'}
-                onClick={() => setView('transportation')}
+                onClick={() => setView('frequency')}
                 >
                     Back
                 </Button>

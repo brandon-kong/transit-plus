@@ -19,6 +19,7 @@ import { useCreateTripStore } from "@/lib/state/create_trip";
 import CreateTripStartingPointView from "./views/starting_location";
 import CreateTripEndingPointView from "./views/ending-location";
 import CreateTripTransportationView from "./views/transportation";
+import CreateTripFrequencyView from "./views/frequency";
 import CreateTripTrainInfoView from "./views/train-info";
 import CreateTripNameView from "./views/name";
 
@@ -50,6 +51,12 @@ const CreateTripStates: { [key: string]: any } = {
         description: 'Thank you for helping us make transit safer for everyone.',
         view: <CreateTripTrainInfoView />,
         progress: 'w-[70%]'
+    },
+    'frequency': {
+        title: 'Report Safety Concern',
+        description: 'Thank you for helping us make transit safer for everyone.',
+        view: <CreateTripFrequencyView />,
+        progress: 'w-[80%]'
     },
     'name': {
         title: 'Report Safety Concern',

@@ -89,7 +89,7 @@ export default function CreateTripTransportationView () {
 
                 <Button
                 disabled={!typeOfTransportation}
-                onClick={() => setView('name')}
+                onClick={() => setView('frequency')}
                 >
                     Continue
                 </Button>
