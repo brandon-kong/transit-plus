@@ -11,6 +11,10 @@ export const formatDays = (days: DaysOfWeek[]): string => {
         return 'No days'
     };
 
+    if (days.length === 7) {
+        return 'Every day'
+    }
+
     if (days.length === 2 && (days.includes('Saturday') && days.includes('Sunday'))) {
         return 'Weekends';
     };
@@ -28,13 +32,13 @@ export const formatDays = (days: DaysOfWeek[]): string => {
     // check for consecutive days
     
     const dayIndices = {
-        'Sunday': 0,
-        'Monday': 1,
-        'Tuesday': 2,
-        'Wednesday': 3,
-        'Thursday': 4,
-        'Friday': 5,
-        'Saturday': 6
+        'Monday': 0,
+        'Tuesday': 1,
+        'Wednesday': 2,
+        'Thursday': 3,
+        'Friday': 4,
+        'Saturday': 5,
+        'Sunday': 6,
       };
 
       let consecutive = true;

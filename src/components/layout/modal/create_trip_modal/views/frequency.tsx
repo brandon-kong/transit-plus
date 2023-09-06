@@ -9,6 +9,7 @@ import { Transportation } from "@/lib/state/create_trip";
 import Image from "next/image";
 import { Select, SelectItem, SelectValue, SelectContent, SelectTrigger } from "@/components/ui/select";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { InputWithLabel } from "@/components/input/inputbox";
 
 type IncidentType = {
     title: Transportation,
@@ -42,12 +43,15 @@ export default function CreateTripFrequencyView () {
     const setDaysOfWeek = useCreateTripStore((state) => state.setDaysOfWeek)
     const frequency = useCreateTripStore((state) => state.frequency)
     const setFrequency = useCreateTripStore((state) => state.setFrequency)
+    
+    const departure = useCreateTripStore((state) => state.departure)
+    const setDeparture = useCreateTripStore((state) => state.setDeparture)
 
     return (
         <div className="flex flex-col gap-4 mt-4">
 
-            <ScrollArea className="max-h-[300px]  md:max-h-[500px] h-full">
-                <div className="flex flex-col gap-2">
+            <ScrollArea className="flex flex-col gap-4 max-h-[300px]  md:max-h-[600px] h-full">
+                <div className="flex flex-col gap-2 p-4">
                     <TypographyH4>
                         What days will you be taking this trip?
                     </TypographyH4>
@@ -56,6 +60,7 @@ export default function CreateTripFrequencyView () {
                         {
                             DaysOfWeekFrequency.map((day, index) => (
                                 <DayCard
+                                key={index}
                                 day={day}
                                 onClick={() => {
                                     if (daysOfWeek.includes(day as DaysOfWeek)) {
@@ -74,7 +79,7 @@ export default function CreateTripFrequencyView () {
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-6 mt-4 p-4">
                     <TypographyH4>
                         How frequently will you repeat this trip?
                     </TypographyH4>
@@ -87,12 +92,26 @@ export default function CreateTripFrequencyView () {
                         <SelectContent>
                             {
                                 FrequencyList.map((day, index) => (
-                                    <SelectItem value={day}>{ day }</SelectItem>
+                                    <SelectItem value={day} key={index}>{ day }</SelectItem>
                                 ))
                             }
                         </SelectContent>
                         
                     </Select>
+                </div>
+
+                <div className="flex flex-col gap-6 mt-4 p-4">
+                    <TypographyH4>
+                        When will you depart?
+                    </TypographyH4>
+                    <InputWithLabel
+                    value={departure}
+                    onChange={(e) => setDeparture(e.target.value)}
+                    label="Departure Time"
+                    placeholder="Departure"
+                    type="time"
+
+                    />
                 </div>
             </ScrollArea>
 

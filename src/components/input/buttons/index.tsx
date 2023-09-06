@@ -66,3 +66,14 @@ export const BackButton = ({ className, ...props }: {
     {...props}
     />
 );
+
+export const DeleteButton = ({ className, ...props }: {
+    className?: string;
+    } & ButtonProps) => (
+    <IconButton
+    src={'/icons/action/back.svg'}
+    alt={'Back Icon'}
+    className={`${className}`}
+    {...props}
+    />
+);

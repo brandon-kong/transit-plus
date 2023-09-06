@@ -33,7 +33,22 @@ export default function CreateTripStartingPointView () {
                         First things first, where are you starting?
                     </TypographyH4>
                 </div>
+
+                    <InputWithLabel 
+                    label="Give this location a name"
+                    name="starting-point-name"
+                    placeholder="Home, Work, etc."
+
+                    value={startingPoint.name}
+                    onChange={(e) => {
+                        setStartingPoint({
+                            ...startingPoint,
+                            name: e.target.value,
+                        })
+                    }}
+                    />
                 <div>
+                    
                     <MapSearchOverlay 
                     onChange={(placeDetails) => {
                         const address_line_1 = placeDetails.formatted_address
@@ -166,19 +181,6 @@ export default function CreateTripStartingPointView () {
                         />
                     </div>
 
-                    <InputWithLabel 
-                    label="Give this location a name"
-                    name="starting-point-name"
-                    placeholder="Home, Work, etc."
-
-                    value={startingPoint.name}
-                    onChange={(e) => {
-                        setStartingPoint({
-                            ...startingPoint,
-                            name: e.target.value,
-                        })
-                    }}
-                    />
                 </form>
             </ScrollArea>
                 

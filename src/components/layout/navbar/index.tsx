@@ -26,7 +26,7 @@ import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { BackButton } from '@/components/input/buttons';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from '@/components/ui/menubar';
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '@/components/ui/menubar';
 import { BlackSpinner } from '@/components/spinner';
 
 const components: { title: string; href: string; description: string }[] = [
@@ -153,6 +153,14 @@ export default function Navbar () {
                                 </MenubarTrigger>
 
                                 <MenubarContent align='end'>
+                                    <MenubarItem>Notifications</MenubarItem>
+                                    <MenubarItem>Account</MenubarItem>
+                                    <MenubarSeparator />
+                                    <MenubarItem>Manage trips</MenubarItem>
+                                    <MenubarItem>Rewards</MenubarItem>
+                                    <MenubarItem>Developers</MenubarItem>
+                                    <MenubarSeparator />
+                                    <MenubarItem>Help center</MenubarItem>
                                     <MenubarItem
                                     onClick={() => signOut()}
                                     >

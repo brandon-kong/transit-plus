@@ -248,6 +248,8 @@ export const MapSearchOverlay = ({ onChange }: {
     };
 
     return (
+        <div className={''}>
+
         <div className="flex flex-col pointer-events-auto" id="address-input">  
 
             <div className="relative w-full flex items-center">
@@ -278,75 +280,75 @@ export const MapSearchOverlay = ({ onChange }: {
                 <div className="absolute top-0 left-0 w-full">
 
                 
-            {showSuggestions && 
-            (
+                {showSuggestions && 
+                (
 
-                <div className=" rounded-lg rounded-t-none bg-white py-2 z-10 border-gray-300 border border-t-0 drop-shadow-md">
-                    {placePredictions.map((item, index) => (
-                        <LocationSearch
-                        key={item.place_id}
-                        isLast={index === placePredictions.length - 1}
+                    <div className=" rounded-lg rounded-t-none bg-white py-2 z-10 border-gray-300 border border-t-0 drop-shadow-md">
+                        {placePredictions.map((item, index) => (
+                            <LocationSearch
+                            key={item.place_id}
+                            isLast={index === placePredictions.length - 1}
 
-                        onClick={() => {
-                            placesService?.getDetails(
-                                {
-                                    placeId: item.place_id,
-                                },
-                                (placeDetails: any) => {
-                                    setPlaceDetails(placeDetails);
-                                    onChange && onChange(placeDetails);
-                                    setText(placeDetails.formatted_address);
+                            onClick={() => {
+                                placesService?.getDetails(
+                                    {
+                                        placeId: item.place_id,
+                                    },
+                                    (placeDetails: any) => {
+                                        setPlaceDetails(placeDetails);
+                                        onChange && onChange(placeDetails);
+                                        setText(placeDetails.formatted_address);
 
-                                    setShowSuggestions(false);
-                                },
-                            );
-                        }}
-                        >
-                            <div className={'p-2 rounded-full bg-accent'}>
-                                <Image
-                                src="/icons/nav/navigation.svg"
-                                width={16}
-                                height={16}
-                                alt="Use my current location"
-                                />
-                            </div>
+                                        setShowSuggestions(false);
+                                    },
+                                );
+                            }}
+                            >
+                                <div className={'p-2 rounded-full bg-accent'}>
+                                    <Image
+                                    src="/icons/nav/navigation.svg"
+                                    width={16}
+                                    height={16}
+                                    alt="Use my current location"
+                                    />
+                                </div>
 
-                            <div className={'flex flex-col'}>
-                                <TypographyP className={'text-sm'}>
-                                    { item.structured_formatting.main_text }
-                                </TypographyP>
-                                <TypographyP className={'text-gray-400 text-xs'}>
-                                    { item.structured_formatting.secondary_text }
-                                </TypographyP>
-                            </div>
-                            
-                        </LocationSearch>
-                    ))}
-
-                    {
-                        (placePredictions.length === 0 && !isPlacePredictionsLoading) && (
-        
-                                
-                                <LocationSearch
-                                onClick={() => getUserLocation()}
-                                isLast
-                                >
-                                    <div className={'p-2 rounded-full bg-accent'}>
-                                        <Image
-                                        src="/icons/nav/navigation.svg"
-                                        width={16}
-                                        height={16}
-                                        alt="Use my current location"
-                                        />
-                                    </div>
-                                    
-        
-                                    <TypographyP>
-                                        Use my current location
+                                <div className={'flex flex-col'}>
+                                    <TypographyP className={'text-sm'}>
+                                        { item.structured_formatting.main_text }
                                     </TypographyP>
-                                </LocationSearch>
-                        )
-                    }
+                                    <TypographyP className={'text-gray-400 text-xs'}>
+                                        { item.structured_formatting.secondary_text }
+                                    </TypographyP>
+                                </div>
+                                
+                            </LocationSearch>
+                        ))}
+
+                        {
+                            (placePredictions.length === 0 && !isPlacePredictionsLoading) && (
+            
+                                    
+                                    <LocationSearch
+                                    onClick={() => getUserLocation()}
+                                    isLast
+                                    >
+                                        <div className={'p-2 rounded-full bg-accent'}>
+                                            <Image
+                                            src="/icons/nav/navigation.svg"
+                                            width={16}
+                                            height={16}
+                                            alt="Use my current location"
+                                            />
+                                        </div>
+                                        
+            
+                                        <TypographyP>
+                                            Use my current location
+                                        </TypographyP>
+                                    </LocationSearch>
+                            )
+                        }
                     </div>
                 )
             }
@@ -355,7 +357,8 @@ export const MapSearchOverlay = ({ onChange }: {
 
             
         </div>
-        
+
+        </div>
     )
 }
 

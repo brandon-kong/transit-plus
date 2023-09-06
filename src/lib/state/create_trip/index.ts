@@ -47,6 +47,9 @@ const initial = (set: any) => ({
     frequency: 'Never' as Frequency,
     setFrequency: (frequency: Frequency) => set({ frequency }),
 
+    departure: new Date().getTime().toLocaleString(),
+    setDeparture: (departure: string) => set({ departure }),
+
     clear: () => set(initial(set))
 });
 
@@ -89,6 +92,9 @@ export interface CreateTripState {
 
     frequency: Frequency;
     setFrequency: (frequency: Frequency) => void;
+
+    departure: string;
+    setDeparture: (departure: string) => void;
 
     clear: () => void;
 }

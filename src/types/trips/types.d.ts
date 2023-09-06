@@ -32,3 +32,15 @@ export type TripCreateData = {
     type_of_transportation: Transportation;
 
 }
+
+export type TripData = {
+    id: Number;
+    name: string;
+    locations: DumpedAddress[];
+
+    days: DaysOfWeek[];
+    weeks_to_repeat: Frequency;
+
+    type_of_transportation: Transportation;
+
+}

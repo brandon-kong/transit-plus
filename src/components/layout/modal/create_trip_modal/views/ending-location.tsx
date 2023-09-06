@@ -26,6 +26,20 @@ export default function CreateTripEndingPointView () {
                         What&apos;s the destination?
                     </TypographyH4>
                 </div>
+
+                <InputWithLabel 
+                    label="Give this location a name"
+                    name="starting-point-name"
+                    placeholder="Home, Work, etc."
+
+                    value={destination.name}
+                    onChange={(e) => {
+                        setDestination({
+                            ...destination,
+                            name: e.target.value,
+                        })
+                    }}
+                    />
                 <div>
                     <MapSearchOverlay 
                     onChange={(placeDetails) => {
@@ -159,19 +173,6 @@ export default function CreateTripEndingPointView () {
                         />
                     </div>
 
-                    <InputWithLabel 
-                    label="Give this location a name"
-                    name="starting-point-name"
-                    placeholder="Home, Work, etc."
-
-                    value={destination.name}
-                    onChange={(e) => {
-                        setDestination({
-                            ...destination,
-                            name: e.target.value,
-                        })
-                    }}
-                    />
                 </form>
             </ScrollArea>
                 
