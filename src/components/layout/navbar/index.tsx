@@ -101,7 +101,7 @@ export default function Navbar () {
                             <NavigationMenuItem>
                                 <NavigationMenuLink 
                                 className={navigationMenuTriggerStyle()}
-                                href="#">
+                                href="/track">
                                     Track routes
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
@@ -154,6 +154,7 @@ export default function Navbar () {
 
                                 <MenubarContent align='end'>
                                     <MenubarItem>Notifications</MenubarItem>
+                                    <MenubarItem>Messages</MenubarItem>
                                     <MenubarItem>Account</MenubarItem>
                                     <MenubarSeparator />
                                     <MenubarItem>Manage trips</MenubarItem>
