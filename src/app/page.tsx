@@ -134,53 +134,101 @@ export default function Home() {
 
 
                     <div className={'flex flex-col gap-20'}>
-                        <div className={'flex flex-col mx-auto md:flex-row justify-center gap-20'}>
-                            <div className={'max-w-md  w-full flex justify-center md:justify-end'}>
+
+                        <div className={'grid grid-cols-1 md:grid-cols-2 gap-20'}>
+                            <div className={'w-full flex justify-center md:justify-end'}>
                                 <Image
-                                src={'/illustrations/money.svg'}
+                                src={'/illustrations/trip.svg'}
                                 alt="Workflow"
                                 width={200}
                                 height={200}
-
-                                className={'select-none'}
-                                />
+                            />
                             </div>
-                            <div className={'max-w-md flex flex-col gap-4'}>
+                            <div className={'max-w-md flex flex-col gap-4 mx-auto'}>
                                 <TypographyH3 className={'text-center md:text-left'}>
-                                    Pay NOTHING.
+                                    Take Charge of Your Journey
                                 </TypographyH3>
                                 <TypographyP className='leading-7 text-center md:text-left'>
-                                    That&apos;s right, we believe that safety and public transit information
-                                    should be free for <b>everybody</b>. We will never ask you to pay a single penny.*
+                                    Simplify travel planning with our all-in-one trip management 
+                                    solution. It's designed for both daily commuters and occasional adventurers.
                                 </TypographyP>
+                                <Button variant={'link'} className={'self-start max-w-[300px] text-lochinvar-500'}>
+                                    Learn more {'>'}
+                                </Button>
                             </div>
-                            
                         </div>
-
-
-                        <div className={'flex flex-col mx-auto md:flex-row justify-center gap-20'}>
-                            <div className={'max-w-md flex flex-col gap-4'}>
-                                <TypographyH3 className={'text-center md:text-left'}>
-                                    See EVERYTHING.
-                                </TypographyH3>
-                                <TypographyP className='leading-7 text-center md:text-left'>
-                                    View all the information you need to plan your trips, including real-time
-                                    crowdsourced data on safety concerns, and more.
-                                </TypographyP>
-                            </div>
-
-                            <div className={'max-w-md  w-full flex justify-center md:justify-end'}>
+                        
+                            
+        
+                        <div className={'grid grid-cols-1 md:grid-cols-2 gap-20'}>
+                            <div className={'w-full flex justify-center md:justify-start md:order-2'}>
                                 <Image
-                                src={'/illustrations/download.svg'}
+                                src={'/illustrations/change.svg'}
                                 alt="Workflow"
-                                width={200}
-                                height={200}
-
-                                className={'select-none'}
-                                />
+                                width={220}
+                                height={220}
+                            />
                             </div>
-                            
+                            <div className={'max-w-md flex flex-col gap-4 mx-auto'}>
+                                <TypographyH3 className={'text-center md:text-left'}>
+                                    Navigate with Precision
+                                </TypographyH3>
+                                <TypographyP className='leading-7 text-center md:text-left'>
+                                    Stay informed with real-time public transport tracking. 
+                                    This ensures punctual and hassle-free commutes, all easily 
+                                    accessible on your device.
+                                </TypographyP>
+
+                                <Button variant={'link'} className={'self-start max-w-[300px] text-lochinvar-500'}>
+                                    Learn more {'>'}
+                                </Button>
+                            </div>
                         </div>
+
+                        <div className={'grid grid-cols-1 md:grid-cols-2 gap-20'}>
+                            <div className={'w-full flex justify-center md:justify-end'}>
+                                <Image
+                                src={'/illustrations/meditate.svg'}
+                                alt="Workflow"
+                                width={220}
+                                height={220}
+                            />
+                            </div>
+                            <div className={'max-w-md flex flex-col gap-4 mx-auto'}>
+                                <TypographyH3 className={'text-center md:text-left'}>
+                                    Safety and Insights Unleashed
+                                </TypographyH3>
+                                <TypographyP className='leading-7 text-center md:text-left'>
+                                    Join a vigilant community of travelers to receive 
+                                    real-time crowd-sourced updates on safety, delays, and more. 
+                                    This enriches your travel experience with valuable insights and 
+                                    peace of mind.
+                                </TypographyP>
+
+                                <Button variant={'link'} className={'self-start max-w-[300px] text-lochinvar-500'}>
+                                    Learn more {'>'}
+                                </Button>
+                            </div>
+                        </div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div className={'bg-lochinvar-50 w-full flex p-8 lg:p-24 flex-col h-fit gap-4 xl:gap-20'}>
+                <div className={'max-w-[1000px] w-full flex flex-col gap-10 mx-auto'}>
+                    <div className={'mx-auto'}>
+                        <TypographyH2 className={'w-full text-center'}>
+                            What people are saying about Transit+
+                        </TypographyH2>
+                    </div>
+
+
+
+                    <div className={'flex flex-col gap-20'}>
+                        No one said anything yet hehehe
                     </div>
                 </div>
             </div>
