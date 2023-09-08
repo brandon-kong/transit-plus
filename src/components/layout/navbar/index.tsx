@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
 
@@ -28,6 +28,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from '@/component
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '@/components/ui/menubar';
 import { BlackSpinner } from '@/components/spinner';
+import { SelectScrollUpButton } from '@radix-ui/react-select';
 
 const components: { title: string; href: string; description: string }[] = [
     {
@@ -71,8 +72,17 @@ export default function Navbar () {
     const { setOpen } = useLoginModal();
     const { data: session, status } = useSession();
 
+    const [scrollPosition, setScrollPosition] = useState<number>(0);
+
+    const handleScroll = () => {
+        setScrollPosition(window.scrollY);
+    }
+
+    useEffect(() => {
+        document.addEventListener('scroll', handleScroll)
+    })
     return (
-        <div className=" px-8 md:px-[80px] lg:px-[50px] flex justify-between items-center h-16 bg-white text-black relative" role="navigation">
+        <div className={`transition-colors px-8 md:px-[80px] lg:px-[50px] flex justify-between items-center h-16 text-black w-full fixed top-0 z-10 ${ scrollPosition > 10 ? 'bg-white drop-shadow-md' : 'bg-transparent'}`} role="navigation">
             <div className="flex items-center">
                 <div className="flex-shrink-0 flex items-center">
                     <Link href="/">
@@ -175,8 +185,8 @@ export default function Navbar () {
                         </>
                     ) : (
                         <div className="flex-shrink-0 flex gap-4">
-                            <Button variant={'ghost'} className="rounded-lg px-6" onClick={() => setOpen(true)} >Log in</Button>
-                            <Button variant={'outline'} className="rounded-lg text-black border border-black px-6" onClick={() => setOpen(true)}>Sign up now</Button>
+                            <Button variant={'ghost'} className="rounded-lg px-6 hover:bg-lochinvar-100" onClick={() => setOpen(true)} >Log in</Button>
+                            <Button variant={'outline'} className="rounded-lg text-black border border-black px-6 bg-transparent hover:bg-lochinvar-100" onClick={() => setOpen(true)}>Sign up now</Button>
                         </div>
                     ))
                 }

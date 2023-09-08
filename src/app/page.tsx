@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { TypographyH1, TypographyP } from '@/components/typography'
+import { TypographyH1, TypographyH2, TypographyH3, TypographyP } from '@/components/typography'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 
@@ -10,8 +10,9 @@ import GrayscaleCompany from '@/components/company-brand';
 import { motion } from 'framer-motion'
 export default function Home() {
     return (
-        <main className={'h-[700px] flex flex-col w-full'} >
-            <div className="flex p-8 lg:p-32 flex-col xl:flex-row h-fit gap-4 xl:gap-20 mx-auto ">
+        // add 4rem to top padding to account for fixed navbar
+        <main className={'pt-16 flex flex-col w-full bg-lochinvar-50'} >
+            <div className="flex p-8 lg:p-24 flex-col xl:flex-row h-fit gap-4 xl:gap-20 mx-auto">
                 <section className={'flex flex-col max-w-[510px] gap-8 text-[#0F172A]'}>
 
                     <div>
@@ -41,7 +42,7 @@ export default function Home() {
 
                     <div>
                         <div>
-                            <Button size={'lg'} className={'bg-[#35927B] hover:bg-[#15826B] px-10 py-7 text-[20px]'}>
+                            <Button size={'lg'} className={'bg-[#ff6d00] text-white hover:bg-[#ff6000] px-10 py-7 text-[20px]'}>
                                 Get Started
                             </Button>
                         </div>
@@ -83,7 +84,7 @@ export default function Home() {
                 </section>
 
                 <div
-                className='md:min-w-[600px] w-full'
+                className='md:min-w-[600px] h-min w-full'
                 >
                     <motion.div
 
@@ -106,7 +107,7 @@ export default function Home() {
                         duration: 1,
                     }}
 
-                    className={'relative w-full h-full max-w-[600px] max-h-[600px]'}
+                    className={'relative w-full h-full max-w-[600px] max-h-[700px]'}
 
                     >
                         <Image
@@ -122,8 +123,66 @@ export default function Home() {
             
             </div>
 
-            <div className='w-full bg-gray-100 min-h-[500px]'>
-                a
+            <div className={'bg-white w-full flex p-8 lg:p-24 flex-col h-fit gap-4 xl:gap-20'}>
+                <div className={'max-w-[1000px] w-full flex flex-col gap-10 mx-auto'}>
+                    <div className={'mx-auto'}>
+                        <TypographyH2 className={'w-full text-center'}>
+                            Why Transit+ ?
+                        </TypographyH2>
+                    </div>
+
+
+
+                    <div className={'flex flex-col gap-20'}>
+                        <div className={'flex flex-col mx-auto md:flex-row justify-center gap-20'}>
+                            <div className={'max-w-md  w-full flex justify-center md:justify-end'}>
+                                <Image
+                                src={'/illustrations/money.svg'}
+                                alt="Workflow"
+                                width={200}
+                                height={200}
+
+                                className={'select-none'}
+                                />
+                            </div>
+                            <div className={'max-w-md flex flex-col gap-4'}>
+                                <TypographyH3 className={'text-center md:text-left'}>
+                                    Pay NOTHING.
+                                </TypographyH3>
+                                <TypographyP className='leading-7 text-center md:text-left'>
+                                    That&apos;s right, we believe that safety and public transit information
+                                    should be free for <b>everybody</b>. We will never ask you to pay a single penny.*
+                                </TypographyP>
+                            </div>
+                            
+                        </div>
+
+
+                        <div className={'flex flex-col mx-auto md:flex-row justify-center gap-20'}>
+                            <div className={'max-w-md flex flex-col gap-4'}>
+                                <TypographyH3 className={'text-center md:text-left'}>
+                                    See EVERYTHING.
+                                </TypographyH3>
+                                <TypographyP className='leading-7 text-center md:text-left'>
+                                    View all the information you need to plan your trips, including real-time
+                                    crowdsourced data on safety concerns, and more.
+                                </TypographyP>
+                            </div>
+
+                            <div className={'max-w-md  w-full flex justify-center md:justify-end'}>
+                                <Image
+                                src={'/illustrations/download.svg'}
+                                alt="Workflow"
+                                width={200}
+                                height={200}
+
+                                className={'select-none'}
+                                />
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     )

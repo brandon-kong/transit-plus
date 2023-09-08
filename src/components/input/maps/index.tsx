@@ -8,10 +8,6 @@ export const Map = (props: any) => {
     defaultCenter={{ lat: 41, lng: -87.62 }}
     defaultZoom={15}
 
-    options={{
-        streetViewControl: true,
-    }}
-
     center={{
         lat: 41.88,
         lng: -87.62
