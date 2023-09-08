@@ -150,7 +150,7 @@ export default function Home() {
                                 </TypographyH3>
                                 <TypographyP className='leading-7 text-center md:text-left'>
                                     Simplify travel planning with our all-in-one trip management 
-                                    solution. It's designed for both daily commuters and occasional adventurers.
+                                    solution. It&apos;s designed for both daily commuters and occasional adventurers.
                                 </TypographyP>
                                 <Button variant={'link'} className={'self-start max-w-[300px] text-lochinvar-500'}>
                                     Learn more {'>'}
