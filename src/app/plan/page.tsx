@@ -38,7 +38,7 @@ export default function PlanTripView() {
 
     }
     return (
-        <main className={'h-[700px] flex flex-col w-full max-h-lg'} >
+        <main className={'h-[700px] pt-16 flex flex-col w-full max-h-lg'} >
             <div className="flex p-8 lg:p-20 flex-col h-fit gap-4 max-w-4xl mx-auto w-full ">
                 
                 <div className='flex justify-between w-full'>
