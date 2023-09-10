@@ -63,7 +63,7 @@ export default function TrackRoute() {
                 {
                     redLines.map((train: any, index) => {
                         return (
-                            <UserMarker
+                            <RedLineMarker
                             key={index}
                             lat={train.lat}
                             lng={train.lon}
@@ -76,7 +76,7 @@ export default function TrackRoute() {
     )
 }
 
-const UserMarker = ({
+const RedLineMarker = ({
     lat,
     lng
 }: {
