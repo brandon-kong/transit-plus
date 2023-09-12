@@ -170,7 +170,15 @@ export default function MainNavbar () {
                                     <MenubarSeparator />
                                     <MenubarItem>Manage trips</MenubarItem>
                                     <MenubarItem>Rewards</MenubarItem>
-                                    <MenubarItem>Developers</MenubarItem>
+                                    
+                                    <Link
+                                    href={'/developers'}
+                                    >
+                                        <MenubarItem>
+                                            Developers
+                                        </MenubarItem>
+                                    </Link>
+                                    
                                     <MenubarSeparator />
                                     <MenubarItem>Help center</MenubarItem>
                                     <MenubarItem
