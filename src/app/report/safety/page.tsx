@@ -1,5 +1,6 @@
 'use client';
 
+import SafetyConcernCard from '@/components/cards/safety';
 import { TypographyH2 } from '@/components/typography';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button'
@@ -39,8 +40,11 @@ export default function ReportSafetyPage() {
                 </div>
                 
 
-                <div>
-
+                <div className={'flex flex-col gap-8'}>
+                    <SafetyConcernCard />
+                    <SafetyConcernCard />
+                    <SafetyConcernCard />
+                    <SafetyConcernCard />
                 </div>
             
             </div>

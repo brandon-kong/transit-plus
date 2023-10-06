@@ -121,9 +121,9 @@ export default function MainNavbar ({ subnav }: {
                         <BlackSpinner />
                     ) : ( status === 'authenticated' ? (
                         <>
-                        <HoverCard openDelay={100} defaultOpen={true}>
+                        <HoverCard openDelay={100}>
                             <HoverCardTrigger asChild>
-                                <Button variant={'ghost'} className={'px-2 flex gap-2'}>
+                                <Button variant={'ghost'} className={'px-2 flex gap-2 hover:bg-lochinvar-100'}>
                                     <Image
                                     src={'/brand/transit-currency.svg'}
                                     alt={'Transit+ currency'}
