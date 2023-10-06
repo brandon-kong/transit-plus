@@ -1,110 +1,103 @@
-import { InputWithLabel, PhoneInput } from "@/components/input/inputbox"
-import { SocialButton } from "@/components/input/buttons"
-import { Button } from "@/components/ui/button"
+import { InputWithLabel, PhoneInput } from '@/components/input/inputbox';
+import { SocialButton } from '@/components/input/buttons';
+import { Button } from '@/components/ui/button';
 
-import { signIn } from "next-auth/react"
+import { signIn } from 'next-auth/react';
 
-import { useLoginStore } from "@/lib/state/login"
-import { sendPhoneOTP, userExistsWithEmail } from "@/lib/auth/util"
-import { usePathname, useSearchParams } from "next/navigation"
+import { useLoginStore } from '@/lib/state/login';
+import { sendPhoneOTP, userExistsWithEmail } from '@/lib/auth/util';
+import { usePathname, useSearchParams } from 'next/navigation';
 
-export default function LoginModalLoginView () {
-    const searchparams = useSearchParams()
-    
+export default function LoginModalLoginView() {
+    const searchparams = useSearchParams();
+
     const signInWithGoogle = () => {
         // TODO: callback url should be dynamic
-        
 
         if (searchparams.get('redirect')) {
-            signIn('google', { callbackUrl: `http://localhost:3000/${searchparams.get('redirect')}` })
+            signIn('google', { callbackUrl: `http://localhost:3000/${searchparams.get('redirect')}` });
             return;
         }
-        signIn('google', { callbackUrl: 'http://localhost:3000/' })
-    }
+        signIn('google', { callbackUrl: 'http://localhost:3000/' });
+    };
 
-    const setView = useLoginStore((state) => state.setView)
-    const emailOrPhone = useLoginStore((state) => state.emailOrPhone)
-    const setEmailOrPhone = useLoginStore((state) => state.setEmailOrPhone)
-    const setLoading = useLoginStore((state) => state.setLoading)
-    const email = useLoginStore((state) => state.email)
-    const setEmail = useLoginStore((state) => state.setEmail)
+    const setView = useLoginStore(state => state.setView);
+    const emailOrPhone = useLoginStore(state => state.emailOrPhone);
+    const setEmailOrPhone = useLoginStore(state => state.setEmailOrPhone);
+    const setLoading = useLoginStore(state => state.setLoading);
+    const email = useLoginStore(state => state.email);
+    const setEmail = useLoginStore(state => state.setEmail);
 
-    const phone = useLoginStore((state) => state.phone)
-    const setPhone = useLoginStore((state) => state.setPhone)
-    const countryCode = useLoginStore((state) => state.countryCode)
-    const setCountryCode = useLoginStore((state) => state.setCountryCode)
+    const phone = useLoginStore(state => state.phone);
+    const setPhone = useLoginStore(state => state.setPhone);
+    const countryCode = useLoginStore(state => state.countryCode);
+    const setCountryCode = useLoginStore(state => state.setCountryCode);
 
     const attemptEmailLogin = async () => {
-        setLoading(true)
-       
-        const userExists = await userExistsWithEmail(email)
+        setLoading(true);
+
+        const userExists = await userExistsWithEmail(email);
         if (userExists.status_code === 200) {
-            const detail = userExists.detail as { exists: boolean, user_id: string }
+            const detail = userExists.detail as { exists: boolean; user_id: string };
             if (detail.exists) {
                 setView('email-verify');
-            }
-            else {
+            } else {
                 setView('email-register');
             }
-            
         }
 
         // TODO: handle error
 
-        setLoading(false)
-    }
+        setLoading(false);
+    };
 
     const attemptPhoneSendOTP = async () => {
-        setLoading(true)
-       
-        const sentOTP = await sendPhoneOTP(phone, countryCode)
+        setLoading(true);
+
+        const sentOTP = await sendPhoneOTP(phone, countryCode);
         if (sentOTP.status_code === 200) {
             setView('otp-verify');
         }
 
         // TODO: handle error
 
-        setLoading(false)
-    }
+        setLoading(false);
+    };
 
     const handleContinue = (e: any) => {
-        e.preventDefault()
+        e.preventDefault();
 
         if (emailOrPhone === 'email') {
-            attemptEmailLogin()
+            attemptEmailLogin();
         } else {
-            attemptPhoneSendOTP()
+            attemptPhoneSendOTP();
         }
 
         return;
-    }
+    };
 
     return (
         <div className="flex flex-col gap-4 mt-4">
-
             <form onSubmit={handleContinue} className="flex flex-col gap-4">
-                {
-                    emailOrPhone === 'email' ? (
+                {emailOrPhone === 'email' ? (
                     <InputWithLabel
-                    autoFocus
-                    label="Email"
-                    placeholder="Email"
-                    name="email"
-                    className="transition-all"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                        autoFocus
+                        label="Email"
+                        placeholder="Email"
+                        name="email"
+                        className="transition-all"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                     />
-                    ) : (
-                        <PhoneInput
+                ) : (
+                    <PhoneInput
                         autoFocus
                         changed={({ dialCode, phone }) => {
-                            setPhone(phone)
-                            setCountryCode(dialCode)
+                            setPhone(phone);
+                            setCountryCode(dialCode);
                         }}
-                        />
-                    )
-                }
-                
+                    />
+                )}
 
                 <Button type="submit" size={'lg'} className={'my-4 bg-black hover:bg-gray-900 h-12'}>
                     Continue
@@ -117,31 +110,19 @@ export default function LoginModalLoginView () {
                 <hr className="w-full" />
             </div>
 
-            <SocialButton
-            onClick={signInWithGoogle}
-            src={'/icons/brand/google.svg'}
-            >
-            Continue with Google
+            <SocialButton onClick={signInWithGoogle} src={'/icons/brand/google.svg'}>
+                Continue with Google
             </SocialButton>
 
-            {
-                emailOrPhone === 'email' ? (
-                    <SocialButton
-                    onClick={() => setEmailOrPhone('phone')}
-                    src={'/icons/brand/phone.svg'}
-                    >
+            {emailOrPhone === 'email' ? (
+                <SocialButton onClick={() => setEmailOrPhone('phone')} src={'/icons/brand/phone.svg'}>
                     Continue with Phone
-                    </SocialButton>
-                ) : (
-                    <SocialButton
-                    onClick={() => setEmailOrPhone('email')}
-                    src={'/icons/brand/mail.svg'}
-                    >
+                </SocialButton>
+            ) : (
+                <SocialButton onClick={() => setEmailOrPhone('email')} src={'/icons/brand/mail.svg'}>
                     Continue with Email
-                    </SocialButton>
-                )
-            }
-
+                </SocialButton>
+            )}
         </div>
-    )
+    );
 }

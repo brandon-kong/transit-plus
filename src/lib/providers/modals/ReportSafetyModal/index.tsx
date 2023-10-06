@@ -1,11 +1,11 @@
 'use client';
 
-import { ReportSafetyModalContext } from "./context";
+import { ReportSafetyModalContext } from './context';
 
-import React, { Suspense, useState } from "react";
-import ReportSafetyModal from "@/components/layout/modal/report_safety_modal";
+import React, { Suspense, useState } from 'react';
+import ReportSafetyModal from '@/components/layout/modal/report_safety_modal';
 
-const ReportSafetyModalProvider = ({ children } : { children: React.ReactNode }) => {
+const ReportSafetyModalProvider = ({ children }: { children: React.ReactNode }) => {
     const [open, setOpen] = useState(false);
 
     return (
@@ -15,7 +15,7 @@ const ReportSafetyModalProvider = ({ children } : { children: React.ReactNode })
             </Suspense>
             {children}
         </ReportSafetyModalContext.Provider>
-    )
+    );
 };
 
 export default ReportSafetyModalProvider;

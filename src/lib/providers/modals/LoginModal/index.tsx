@@ -1,14 +1,14 @@
 'use client';
 
-import { LoginModalContext } from "./context";
+import { LoginModalContext } from './context';
 
-import React, { Suspense, useState, useEffect, useCallback } from "react";
-import LoginModal from "@/components/layout/modal/login_modal";
+import React, { Suspense, useState, useEffect, useCallback } from 'react';
+import LoginModal from '@/components/layout/modal/login_modal';
 
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
-import { getSession } from "next-auth/react";
+import { getSession } from 'next-auth/react';
 
-const LoginModalProvider = ({ children } : { children: React.ReactNode }) => {
+const LoginModalProvider = ({ children }: { children: React.ReactNode }) => {
     const [open, setOpen] = useState(false);
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -19,20 +19,20 @@ const LoginModalProvider = ({ children } : { children: React.ReactNode }) => {
             setOpen(false);
             return;
         }
-        
+
         const session = getSession();
         session
-        .then((session) => {
-            if (session && session.user) {
-                setOpen(false);
-                return;
-            }
+            .then(session => {
+                if (session && session.user) {
+                    setOpen(false);
+                    return;
+                }
 
-            setOpen(value);
-        })
-        .catch(err => {
-            setOpen(false);
-        })
+                setOpen(value);
+            })
+            .catch(err => {
+                setOpen(false);
+            });
     }, []);
 
     useEffect(() => {
@@ -40,8 +40,7 @@ const LoginModalProvider = ({ children } : { children: React.ReactNode }) => {
             if (searchParams.get('login') === '1') {
                 newSetOpen(true);
                 router.replace(pathname, { scroll: true });
-            }
-            else {
+            } else {
                 newSetOpen(false);
             }
         }
@@ -66,7 +65,7 @@ const LoginModalProvider = ({ children } : { children: React.ReactNode }) => {
             </Suspense>
             {children}
         </LoginModalContext.Provider>
-    )
+    );
 };
 
 export default LoginModalProvider;

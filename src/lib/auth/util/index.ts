@@ -64,11 +64,10 @@ export async function sendPhoneOTP(phone: string, country_code: string): Promise
     try {
         const { data, status } = await api.post('/accounts/otp/send/', {
             phone: phoneWithCountryCode,
-           
         });
 
         const response: Success | Error = data;
-         response.status_code = status;
+        response.status_code = status;
         return response;
     } catch (error: any) {
         const response: Error = error.response ? error.response.data : {};
@@ -83,11 +82,10 @@ export async function callUserWithOTP(phone: string, country_code: string): Prom
     try {
         const { data, status } = await api.post('/accounts/otp/call/', {
             phone: phoneWithCountryCode,
-           
         });
 
         const response: Success | Error = data;
-         response.status_code = status;
+        response.status_code = status;
         return response;
     } catch (error: any) {
         const response: Error = error.response ? error.response.data : {};
@@ -196,7 +194,7 @@ export async function registerUserWithEmail({
         const response: Success | Error = data;
         return response;
     } catch (error: any) {
-        const response: Error = error.response.data
+        const response: Error = error.response.data;
         return response;
     }
 }
@@ -218,7 +216,7 @@ export async function verifyEmailWithToken(token: string) {
         const { data } = await api.get(`/accounts/email/verify/?token=${token}`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
-            }
+            },
         });
 
         const response: Success | Error = data;

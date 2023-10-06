@@ -4,10 +4,17 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { CTATrainStation, GeometryPointWithAddress } from '@/types/geometry/types';
 import { Address } from '@/types/trips/types';
 
-export type DaysOfWeek = 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday'
-export type Frequency = 'Never' | 'Weekly' | 'Biweekly' | 'Monthly' | 'Bimonthly'
-export type View = 'starting-point' | 'destination' | 'date-time' | 'transportation' | 'train-info' | 'name' | 'frequency'
-export type Transportation = 'Car' | 'Bus' | 'CTA Train' | 'Bicycle' | 'Walk'  | 'Boat' | 'Plane'
+export type DaysOfWeek = 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday';
+export type Frequency = 'Never' | 'Weekly' | 'Biweekly' | 'Monthly' | 'Bimonthly';
+export type View =
+    | 'starting-point'
+    | 'destination'
+    | 'date-time'
+    | 'transportation'
+    | 'train-info'
+    | 'name'
+    | 'frequency';
+export type Transportation = 'Car' | 'Bus' | 'CTA Train' | 'Bicycle' | 'Walk' | 'Boat' | 'Plane';
 
 const initial = (set: any) => ({
     loading: false,
@@ -22,11 +29,11 @@ const initial = (set: any) => ({
         lat: 41.8781,
         lng: -87.6298,
     },
-    
+
     setStartingPoint: (starting_point: Address) => set({ starting_point }),
 
     setClosestStation: (closestStation?: CTATrainStation) => set({ closestStation }),
-    
+
     destination: {
         name: '',
         is_start: false,
@@ -38,7 +45,7 @@ const initial = (set: any) => ({
     typeOfTransportation: 'Car' as Transportation,
     setTypeOfTransportation: (typeOfTransportation: Transportation) => set({ typeOfTransportation }),
 
-    name : '',
+    name: '',
     setName: (name: string) => set({ name }),
 
     daysOfWeek: [],
@@ -50,18 +57,14 @@ const initial = (set: any) => ({
     departure: new Date().getTime().toLocaleString(),
     setDeparture: (departure: string) => set({ departure }),
 
-    clear: () => set(initial(set))
+    clear: () => set(initial(set)),
 });
 
-export const useCreateTripStore = create( 
-    persist<CreateTripState>
-    (
-        (set) => (initial(set)),
-        {
-            name: 'transit+-last-create-trip',
-            storage: createJSONStorage(() => sessionStorage)
-        }
-    )
+export const useCreateTripStore = create(
+    persist<CreateTripState>(set => initial(set), {
+        name: 'transit+-last-create-trip',
+        storage: createJSONStorage(() => sessionStorage),
+    }),
 );
 
 export interface CreateTripState {
@@ -71,14 +74,14 @@ export interface CreateTripState {
     view: View;
     setView: (view: View) => void;
 
-    closestStation?: CTATrainStation
+    closestStation?: CTATrainStation;
 
     setClosestStation: (closestStation?: CTATrainStation) => void;
 
     starting_point: Address;
     setStartingPoint: (starting_point: Address) => void;
 
-    destination: Address
+    destination: Address;
     setDestination: (starting_point: Address) => void;
 
     typeOfTransportation: Transportation;

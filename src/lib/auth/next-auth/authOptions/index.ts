@@ -20,7 +20,7 @@ const authOptions: NextAuthOptions = {
         signOut: '/?logout=1',
         error: '/?login=1&auth_error=1',
     },
-    
+
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -165,11 +165,10 @@ const authOptions: NextAuthOptions = {
             if (!token) {
                 return null;
             }
-            
+
             session.access = token.access;
             session.refresh = token.refresh;
             session.error = token.error;
-            
 
             session.user = token.user;
             return session;
@@ -177,7 +176,6 @@ const authOptions: NextAuthOptions = {
 
         async signIn({ user, account, profile, email, credentials, callback }: any) {
             if (credentials) {
-
                 return true;
             }
 

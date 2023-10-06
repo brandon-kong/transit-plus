@@ -1,7 +1,7 @@
 import { Error, Success } from '@/types/response/types';
 import axios from 'axios';
 import { getSession } from 'next-auth/react';
-import { getServerSession } from "next-auth";
+import { getServerSession } from 'next-auth';
 import authOptions from '../next-auth/authOptions';
 
 const api = axios.create({
@@ -12,7 +12,7 @@ const clientApi = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
     headers: {
         'Access-Control-Allow-Origin': '*', // Required for CORS support to work
-    }
+    },
 });
 
 const localFetcherGet = async (url: string) => {
@@ -34,7 +34,7 @@ export const AuthenticatedRequest = async (url: string, method: string, data: an
             error_type: 'invalid_token',
             error_message: 'Invalid token',
             detail: 'Invalid token',
-        }  
+        };
 
         return B;
     }
@@ -46,5 +46,7 @@ export const AuthenticatedRequest = async (url: string, method: string, data: an
         headers: {
             Authorization: `Bearer ${token}`,
         },
-    }).then(res => res.data as Success).catch(err => err.response.data as Error);
-}
+    })
+        .then(res => res.data as Success)
+        .catch(err => err.response.data as Error);
+};

@@ -8,18 +8,14 @@ const initial = (set: any) => ({
     setLng: (lng: number) => set({ lng }),
     setZoom: (zoom: number) => set({ zoom }),
 
-    clear: () => set(initial(set))
+    clear: () => set(initial(set)),
 });
 
-export const useTrackMapStore = create( 
-    persist<TrackMapState>
-    (
-        (set) => (initial(set)),
-        {
-            name: 'transit+-track-map',
-            storage: createJSONStorage(() => localStorage)
-        }
-    )
+export const useTrackMapStore = create(
+    persist<TrackMapState>(set => initial(set), {
+        name: 'transit+-track-map',
+        storage: createJSONStorage(() => localStorage),
+    }),
 );
 
 export interface TrackMapState {

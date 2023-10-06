@@ -1,4 +1,4 @@
-import type { Address, Severity, TypeOfIncident, NewFile } from "@/lib/state/report_safety";
+import type { Address, Severity, TypeOfIncident, NewFile } from '@/lib/state/report_safety';
 
 export type ReportCreateData = {
     latitude: number;
@@ -22,4 +22,4 @@ export type ReportCreateData = {
     additional_info?: string;
 
     files: NewFile[];
-}
+};

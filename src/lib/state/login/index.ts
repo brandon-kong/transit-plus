@@ -1,29 +1,29 @@
 import { create } from 'zustand';
 
 export type EmailOrPhone = 'email' | 'phone';
-export type View = 'login' | 'email-register' | 'phone-register' | 'otp-verify' | 'email-verify'
+export type View = 'login' | 'email-register' | 'phone-register' | 'otp-verify' | 'email-verify';
 
-export const useLoginStore = create<LoginState>((set) => ({
+export const useLoginStore = create<LoginState>(set => ({
     loading: false,
     setLoading: (loading: boolean) => set({ loading }),
 
     view: 'login' as View,
     setView: (view: View) => set({ view }),
 
-    emailOrPhone : 'phone' as EmailOrPhone,
-    setEmailOrPhone : (emailOrPhone: EmailOrPhone) => set({ emailOrPhone }),
+    emailOrPhone: 'phone' as EmailOrPhone,
+    setEmailOrPhone: (emailOrPhone: EmailOrPhone) => set({ emailOrPhone }),
 
-    email : '',
-    setEmail : (email: string) => set({ email }),
+    email: '',
+    setEmail: (email: string) => set({ email }),
 
-    countryCode : '+1',
-    setCountryCode : (countryCode: string) => set({ countryCode }),
-    phone : '',
-    setPhone : (phone: string) => set({ phone }),
+    countryCode: '+1',
+    setCountryCode: (countryCode: string) => set({ countryCode }),
+    phone: '',
+    setPhone: (phone: string) => set({ phone }),
 
-    password : '',
-    setPassword : (password: string) => set({ password }),
-    
+    password: '',
+    setPassword: (password: string) => set({ password }),
+
     otp: '',
     setOtp: (otp: string) => set({ otp }),
 

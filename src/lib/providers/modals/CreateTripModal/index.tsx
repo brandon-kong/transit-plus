@@ -1,11 +1,11 @@
 'use client';
 
-import { CreateTripModalContext } from "./context";
+import { CreateTripModalContext } from './context';
 
-import React, { Suspense, useState } from "react";
-import CreateTripModal from "@/components/layout/modal/create_trip_modal";
+import React, { Suspense, useState } from 'react';
+import CreateTripModal from '@/components/layout/modal/create_trip_modal';
 
-const CreateTripModalProvider = ({ children } : { children: React.ReactNode }) => {
+const CreateTripModalProvider = ({ children }: { children: React.ReactNode }) => {
     const [open, setOpen] = useState(false);
 
     return (
@@ -15,7 +15,7 @@ const CreateTripModalProvider = ({ children } : { children: React.ReactNode }) =
             </Suspense>
             {children}
         </CreateTripModalContext.Provider>
-    )
+    );
 };
 
 export default CreateTripModalProvider;
