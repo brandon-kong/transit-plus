@@ -34,8 +34,48 @@ import MainNavbar from './variants/main';
 import { usePathname } from 'next/navigation';
 import WhiteNavbar from './variants/white';
 
+export type SubNav = { title: string; href: string; description: string }[]
+
+const subnav: SubNav = [
+    {
+      title: "Report Train Fullness",
+      href: "/report/fullness",
+      description:
+        "Report the fullness of a train to help others plan their trips.",
+    },
+    {
+      title: "Report Train Delay",
+      href: "/report/delay",
+      description:
+        "Report the delay of a train to help others plan their trips.",
+    },
+    {
+      title: "Safety Concern",
+      href: "/report/safety",
+      description:
+        "Report a safety concern to help others safely plan their trips.",
+    },
+    {
+      title: "Lost and Found",
+      href: "#",
+      description: "Report a lost item to help others find their lost items.",
+    },
+    {
+      title: "Blog",
+      href: "#",
+      description:
+        "Read about the latest news and updates from the Transit+ team.",
+    },
+    {
+        title: "Leaderboard",
+        href: "#",
+        description:
+          " Recognize and reward users who actively contribute to crowdsourcing.",
+    },
+]
+
 const Views = {
-    '/': <MainNavbar />,
+    '/': <MainNavbar subnav={subnav} />,
     '/track': <WhiteNavbar />
 }
 
@@ -45,7 +85,7 @@ export default function Navbar () {
     const pathname = usePathname();
 
     if (Views[pathname as ViewsKey] === undefined) {
-        return <MainNavbar />
+        return <MainNavbar subnav={subnav} />
     }
 
     return Views[pathname as ViewsKey];

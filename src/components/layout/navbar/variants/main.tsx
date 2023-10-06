@@ -29,46 +29,11 @@ import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '@/components/ui/menubar';
 import { BlackSpinner } from '@/components/spinner';
 import { SelectScrollUpButton } from '@radix-ui/react-select';
+import { SubNav } from '..';
 
-const components: { title: string; href: string; description: string }[] = [
-    {
-      title: "Report Train Fullness",
-      href: "#",
-      description:
-        "Report the fullness of a train to help others plan their trips.",
-    },
-    {
-      title: "Report Train Delay",
-      href: "#",
-      description:
-        "Report the delay of a train to help others plan their trips.",
-    },
-    {
-      title: "Safety Concern",
-      href: "/report/safety",
-      description:
-        "Report a safety concern to help others safely plan their trips.",
-    },
-    {
-      title: "Lost and Found",
-      href: "#",
-      description: "Report a lost item to help others find their lost items.",
-    },
-    {
-      title: "Blog",
-      href: "#",
-      description:
-        "Read about the latest news and updates from the Transit+ team.",
-    },
-    {
-        title: "Leaderboard",
-        href: "#",
-        description:
-          " Recognize and reward users who actively contribute to crowdsourcing.",
-      },
-  ]
-
-export default function MainNavbar () {
+export default function MainNavbar ({ subnav }: {
+    subnav: SubNav
+}) {
     const { setOpen } = useLoginModal();
     const { data: session, status } = useSession();
 
@@ -131,7 +96,7 @@ export default function MainNavbar () {
                                 <NavigationMenuIndicator />
                                 <NavigationMenuContent>
                                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                                    {components.map((component) => (
+                                    {subnav.map((component) => (
                                     <ListItem
                                         className={'hover:bg-lochinvar-50'}
                                         key={component.title}
