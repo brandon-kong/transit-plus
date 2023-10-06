@@ -26,6 +26,7 @@ export default function LeaderboardPage() {
                         <TableRow>
                             <TableHead className={'w-[100px]'}>#</TableHead>
                             <TableHead>User</TableHead>
+                            <TableHead>Contributions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -36,6 +37,9 @@ export default function LeaderboardPage() {
                             <TableCell  className={'font-bold'}>
                                 John Doe
                             </TableCell>
+                            <TableCell>
+                                59
+                            </TableCell>
                         </TableRow>
 
                         <TableRow className={'bg-slate-100'}>
@@ -44,6 +48,9 @@ export default function LeaderboardPage() {
                             </TableCell>
                             <TableCell  className={'font-bold'}>
                                 John Doe
+                            </TableCell>
+                            <TableCell>
+                                59
                             </TableCell>
                         </TableRow>
 
@@ -54,6 +61,9 @@ export default function LeaderboardPage() {
                             <TableCell  className={'font-bold'}>
                                 John Doe
                             </TableCell>
+                            <TableCell>
+                                59
+                            </TableCell>
                         </TableRow>
 
                         <TableRow className={''}>
@@ -62,6 +72,9 @@ export default function LeaderboardPage() {
                             </TableCell>
                             <TableCell  className={'font-bold'}>
                                 John Doe
+                            </TableCell>
+                            <TableCell>
+                                59
                             </TableCell>
                         </TableRow>
 
@@ -72,6 +85,9 @@ export default function LeaderboardPage() {
                             <TableCell  className={'font-bold'}>
                                 John Doe
                             </TableCell>
+                            <TableCell>
+                                59
+                            </TableCell>
                         </TableRow>
 
                         <TableRow className={''}>
@@ -80,6 +96,9 @@ export default function LeaderboardPage() {
                             </TableCell>
                             <TableCell  className={'font-bold'}>
                                 John Doe
+                            </TableCell>
+                            <TableCell>
+                                59
                             </TableCell>
                         </TableRow>
                     </TableBody>
