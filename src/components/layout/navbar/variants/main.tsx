@@ -30,6 +30,8 @@ import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, Me
 import { BlackSpinner } from '@/components/spinner';
 import { SelectScrollUpButton } from '@radix-ui/react-select';
 import { SubNav } from '..';
+import { TypographyP } from '@/components/typography';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 
 export default function MainNavbar ({ subnav }: {
     subnav: SubNav
@@ -113,12 +115,32 @@ export default function MainNavbar ({ subnav }: {
                     </NavigationMenu>
                 </div>
             </div>
-            <div className="items-center hidden md:flex">
+            <div className="items-center hidden md:flex gap-4">
                 {
                     status === 'loading' ? (
                         <BlackSpinner />
                     ) : ( status === 'authenticated' ? (
                         <>
+                        <HoverCard openDelay={100} defaultOpen={true}>
+                            <HoverCardTrigger asChild>
+                                <Button variant={'ghost'} className={'px-2 flex gap-2'}>
+                                    <Image
+                                    src={'/brand/transit-currency.svg'}
+                                    alt={'Transit+ currency'}
+
+                                    width={25}
+                                    height={25}
+                                    />
+                                    <TypographyP className={'text-sm font-bold text-black'}>
+                                        2,500
+                                    </TypographyP>
+                                </Button>
+                            </HoverCardTrigger>
+                            <HoverCardContent className={'min-w-[400px] text-sm'} side='bottom' align='end'>
+                                Contribute to Transit+ to earn Transit+ currency. You can use this currency to redeem rewards, or even get a free subscription.
+                            </HoverCardContent>
+                        </HoverCard>
+                        
                         <Menubar className="border-none bg-transparent">
                             <MenubarMenu>
                                 <MenubarTrigger className={'rounded-full border-none cursor-pointer'}>

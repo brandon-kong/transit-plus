@@ -12,10 +12,10 @@ export default function ReportLostAndFoundPage() {
             <div className="flex p-8 lg:p-20 flex-col h-fit gap-4 max-w-4xl mx-auto w-full ">
                 <div className='flex justify-between w-full'>
                     <TypographyH2 className=''>
-                        Train fullness
+                        Lost and found
                     </TypographyH2>
                     <Button className='w-fit px-6' onClick={() => setOpen(true)}>
-                        Report train fullness
+                        Report lost or found item
                     </Button>
                 </div>
                 

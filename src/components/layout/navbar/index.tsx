@@ -57,7 +57,7 @@ const subnav: SubNav = [
     },
     {
       title: "Lost and Found",
-      href: "#",
+      href: "/report/lost-and-found",
       description: "Report a lost item to help others find their lost items.",
     },
     {
@@ -68,7 +68,7 @@ const subnav: SubNav = [
     },
     {
         title: "Leaderboard",
-        href: "#",
+        href: "/leaderboard",
         description:
           " Recognize and reward users who actively contribute to crowdsourcing.",
     },
