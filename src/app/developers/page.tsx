@@ -6,7 +6,7 @@ import { useCreateTripModal } from '@/lib/providers/modals/CreateTripModal/conte
 
 export default function DeveloperPage() {
     const { setOpen } = useCreateTripModal();
-    
+
     return (
         <main className={'h-[700px] pt-16 flex flex-col w-full max-h-lg'}>
             <div className="flex p-8 lg:p-20 flex-col h-fit gap-4 max-w-4xl mx-auto w-full ">

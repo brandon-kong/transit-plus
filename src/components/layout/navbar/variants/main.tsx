@@ -135,7 +135,12 @@ export default function MainNavbar({ subnav }: { subnav: SubNav }) {
                                 <div className={'flex flex-col gap-4'}>
                                     <div className={'flex justify-between items-center'}>
                                         <TypographyH4>Notifications</TypographyH4>
-                                        <Button size={'sm'}>Manage</Button>
+                                        <IconButton
+                                            variant={'ghost'}
+                                            src={'/icons/nav/settings.svg'}
+                                            alt="Workflow"
+                                            className={'rounded-md hover:bg-lochinvar-100 m-0'}
+                                        />
                                     </div>
 
                                     <div className={'flex flex-col gap-4'}>
