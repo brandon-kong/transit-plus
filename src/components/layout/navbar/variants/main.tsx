@@ -37,8 +37,9 @@ import {
 import { BlackSpinner } from '@/components/spinner';
 import { SelectScrollUpButton } from '@radix-ui/react-select';
 import { SubNav } from '..';
-import { TypographyP } from '@/components/typography';
+import { TypographyH3, TypographyH4, TypographyP } from '@/components/typography';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 export default function MainNavbar({ subnav }: { subnav: SubNav }) {
     const { setOpen } = useLoginModal();
@@ -119,13 +120,39 @@ export default function MainNavbar({ subnav }: { subnav: SubNav }) {
                 {status === 'loading' ? (
                     <BlackSpinner />
                 ) : status === 'authenticated' ? (
-                    <>
-                        <IconButton
+                    <>  
+                    <Popover>
+                        <PopoverTrigger>
+                            <IconButton
                             variant={'ghost'}
                             src={'/icons/nav/bell.svg'}
                             alt="Workflow"
                             className={'rounded-md hover:bg-lochinvar-100 m-0'}
-                        />
+                            />
+                        </PopoverTrigger>
+
+                        <PopoverContent align={'end'} className={'min-w-[340px]'}>
+
+                            <div className={'flex flex-col gap-4'}>
+                                <div className={'flex justify-between items-center'}>
+                                     <TypographyH4>
+                                        Notifications
+                                    </TypographyH4>
+                                    <Button size={'sm'}>
+                                        Manage
+                                    </Button>
+                                </div>
+                               
+
+                                <div className={'flex flex-col gap-4'}>
+                                    <TypographyP>
+                                        You have no notifications.
+                                    </TypographyP>
+                                </div>
+                            </div>
+                            </PopoverContent>
+                    </Popover>
+                        
                         <HoverCard openDelay={100}>
                             <HoverCardTrigger asChild>
                                 <Button variant={'ghost'} className={'px-2 flex gap-2 hover:bg-lochinvar-100'}>
