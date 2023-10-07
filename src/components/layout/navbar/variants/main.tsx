@@ -120,39 +120,31 @@ export default function MainNavbar({ subnav }: { subnav: SubNav }) {
                 {status === 'loading' ? (
                     <BlackSpinner />
                 ) : status === 'authenticated' ? (
-                    <>  
-                    <Popover>
-                        <PopoverTrigger>
-                            <IconButton
-                            variant={'ghost'}
-                            src={'/icons/nav/bell.svg'}
-                            alt="Workflow"
-                            className={'rounded-md hover:bg-lochinvar-100 m-0'}
-                            />
-                        </PopoverTrigger>
+                    <>
+                        <Popover>
+                            <PopoverTrigger>
+                                <IconButton
+                                    variant={'ghost'}
+                                    src={'/icons/nav/bell.svg'}
+                                    alt="Workflow"
+                                    className={'rounded-md hover:bg-lochinvar-100 m-0'}
+                                />
+                            </PopoverTrigger>
 
-                        <PopoverContent align={'end'} className={'min-w-[340px]'}>
-
-                            <div className={'flex flex-col gap-4'}>
-                                <div className={'flex justify-between items-center'}>
-                                     <TypographyH4>
-                                        Notifications
-                                    </TypographyH4>
-                                    <Button size={'sm'}>
-                                        Manage
-                                    </Button>
-                                </div>
-                               
-
+                            <PopoverContent align={'end'} className={'min-w-[340px]'}>
                                 <div className={'flex flex-col gap-4'}>
-                                    <TypographyP>
-                                        You have no notifications.
-                                    </TypographyP>
+                                    <div className={'flex justify-between items-center'}>
+                                        <TypographyH4>Notifications</TypographyH4>
+                                        <Button size={'sm'}>Manage</Button>
+                                    </div>
+
+                                    <div className={'flex flex-col gap-4'}>
+                                        <TypographyP>You have no notifications.</TypographyP>
+                                    </div>
                                 </div>
-                            </div>
                             </PopoverContent>
-                    </Popover>
-                        
+                        </Popover>
+
                         <HoverCard openDelay={100}>
                             <HoverCardTrigger asChild>
                                 <Button variant={'ghost'} className={'px-2 flex gap-2 hover:bg-lochinvar-100'}>
@@ -181,7 +173,6 @@ export default function MainNavbar({ subnav }: { subnav: SubNav }) {
                                 </MenubarTrigger>
 
                                 <MenubarContent align="end">
-                                    <MenubarItem>Notifications</MenubarItem>
                                     <MenubarItem>Messages</MenubarItem>
                                     <MenubarItem>Account</MenubarItem>
                                     <MenubarSeparator />

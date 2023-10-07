@@ -6,7 +6,7 @@ import GoogleMapReact from 'google-map-react';
 
 export default function SafetyConcernCard() {
     return (
-        <Card className={'flex flex-col gap-4 h-fit'}>
+        <Card className={'flex flex-col gap-4 h-fit border-black'}>
             <map className={'w-full h-[300px] rounded-t-lg overflow-hidden'}>
                 <GoogleMapReact
                     yesIWantToUseGoogleMapApiInternals
@@ -30,7 +30,7 @@ export default function SafetyConcernCard() {
                 ></GoogleMapReact>
             </map>
 
-            <div className={'p-4 flex flex-col gap-4'}>
+            <div className={'px-12 pb-8 flex flex-col gap-4'}>
                 {/*<Alert className={'bg-red-100'} variant={'destructive'}>
                         <AlertTitle>
                             This safety concern is on or near your route
@@ -50,7 +50,7 @@ export default function SafetyConcernCard() {
 
                 <div className={'flex flex-col gap-2'}>
                     <TypographyH4>Risk level</TypographyH4>
-                    <div className="flex w-full">
+                    <div className="flex w-full z-0">
                         <Button
                             className={`w-full cursor-default rounded-r-none bg-gray-200 hover:bg-gray-200 transition-all text-black `}
                         >

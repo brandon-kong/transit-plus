@@ -90,6 +90,10 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
         'spin-fast': 'spin .7s linear infinite',
       },
+
+      spacing: {
+        'nav': 'var(--nav-height)',
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],
