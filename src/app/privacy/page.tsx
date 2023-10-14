@@ -1,4 +1,4 @@
-import { TypographyH2 } from "@/components/typography";
+import { TypographyH2 } from '@/components/typography';
 
 export default function PrivacyPage() {
     return (
@@ -9,5 +9,5 @@ export default function PrivacyPage() {
                 </div>
             </div>
         </main>
-    )
+    );
 }

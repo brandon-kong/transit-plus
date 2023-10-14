@@ -29,16 +29,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <head>
                 <script
                     async
-                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2353524585423199"
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub- "
                     crossOrigin="anonymous"
                 ></script>
 
-            <script
-                async
-                src="https://fundingchoicesmessages.google.com/i/pub-2353524585423199?ers=1"
-                nonce="ocgMTzQ86Oa29qV3SNKsUg"
-            ></script>
-            
+                <script
+                    async
+                    src="https://fundingchoicesmessages.google.com/i/pub-2353524585423199?ers=1"
+                    nonce="ocgMTzQ86Oa29qV3SNKsUg"
+                ></script>
             </head>
 
             <body>
