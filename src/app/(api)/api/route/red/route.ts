@@ -1,5 +1,5 @@
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 import { parseString } from 'xml2js';
 import axios from 'axios';
@@ -20,10 +20,5 @@ export async function GET(req: NextRequest) {
         });
     });
 
-
-
-
-    return NextResponse.json(result)
-
-    
+    return NextResponse.json(result);
 }
