@@ -23,3 +23,21 @@ export type ReportCreateData = {
 
     files: NewFile[];
 };
+
+export type Report = {
+    id: number;
+    title: string;
+    type: TypeOfIncident;
+    latitude: number;
+    longitude: number;
+    address_line_1: string;
+    address_line_2: string;
+    city: string;
+    region: string;
+    country: string;
+    postal_code: string;
+    severity: Severity;
+    date_of_incident: string;
+    date_reported: string;
+    additional_details: string;
+}

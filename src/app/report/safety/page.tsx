@@ -7,8 +7,19 @@ import { Button } from '@/components/ui/button';
 import { useReportSafetyModal } from '@/lib/providers/modals/ReportSafetyModal/context';
 import Link from 'next/link';
 
+import useSWR from 'swr';
+import { fetcherGet } from '@/lib/auth/axios/server';
+import { BlackSpinner } from '@/components/spinner';
+import { Report } from '@/types/reports/types';
+
+
 export default function ReportSafetyPage() {
     const { setOpen } = useReportSafetyModal();
+
+    const { data, error, isLoading, mutate } = useSWR('/reports/', fetcherGet);
+
+    const reports = data || [];
+    
     return (
         <main className={'h-[700px] pt-16 flex flex-col w-full max-h-lg'}>
             <div className="flex p-8 lg:p-20 flex-col h-fit gap-4 mx-auto w-full">
@@ -36,13 +47,28 @@ export default function ReportSafetyPage() {
                     </div>
                 </div>
                 
-
-                <div className={'grid md:grid-cols-2 xl:grid-cols-3 gap-8'}>
-                    <SafetyConcernCard />
-                    <SafetyConcernCard />
-                    <SafetyConcernCard />
-                    <SafetyConcernCard />
-                </div>
+                {
+                    isLoading ? (
+                        <div className={'mx-auto'}>
+                            
+                            <BlackSpinner />
+                        </div>
+                    ) : error ? (
+                        <></>
+                    ) : (
+                        <div className={'grid md:grid-cols-2 xl:grid-cols-3 gap-8 w-full'}>
+                   
+                        {    
+                        reports &&
+                            reports.map((report: Report) => {
+                                return <SafetyConcernCard report={report} key={report.id} />;
+                            })
+                        }
+                   
+                        </div>
+                        
+                    )
+                }
             </div>
         </main>
     );

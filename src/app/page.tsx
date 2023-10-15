@@ -129,7 +129,7 @@ export default function Home() {
                                     Simplify travel planning with our all-in-one trip management solution. It&apos;s
                                     designed for both daily commuters and occasional adventurers.
                                 </TypographyP>
-                                <Button variant={'link'} className={'self-start max-w-[300px] text-lochinvar-500'}>
+                                <Button variant={'link'} className={'self-center md:self-start max-w-[300px] text-lochinvar-500'}>
                                     Learn more {'>'}
                                 </Button>
                             </div>
@@ -148,7 +148,7 @@ export default function Home() {
                                     hassle-free commutes, all easily accessible on your device.
                                 </TypographyP>
 
-                                <Button variant={'link'} className={'self-start max-w-[300px] text-lochinvar-500'}>
+                                <Button variant={'link'} className={'self-center md:self-start max-w-[300px] text-lochinvar-500'}>
                                     Learn more {'>'}
                                 </Button>
                             </div>
@@ -168,7 +168,7 @@ export default function Home() {
                                     insights and peace of mind.
                                 </TypographyP>
 
-                                <Button variant={'link'} className={'self-start max-w-[300px] text-lochinvar-500'}>
+                                <Button variant={'link'} className={'self-center md:self-start max-w-[300px] text-lochinvar-500'}>
                                     Learn more {'>'}
                                 </Button>
                             </div>
