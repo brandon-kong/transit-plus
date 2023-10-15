@@ -40,4 +40,4 @@ export type Report = {
     date_of_incident: string;
     date_reported: string;
     additional_details: string;
-}
+};

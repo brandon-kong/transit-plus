@@ -17,4 +17,4 @@ export const convertDateToTimeAgo = (date: string) => {
     } else {
         return `${seconds} seconds ago`;
     }
-}
+};

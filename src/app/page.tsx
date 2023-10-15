@@ -12,7 +12,7 @@ export default function Home() {
     return (
         // add 4rem to top padding to account for fixed navbar
         <main className={'pt-16 flex flex-col w-full bg-lochinvar-50'}>
-            <div className="flex p-8 lg:p-24 flex-col xl:flex-row h-fit gap-4 xl:gap-20 mx-auto">
+            <div className="flex p-8 lg:p-24 flex-col xl:flex-row h-fit gap-4 xl:gap-20 mx-auto bg-lochinvar-50">
                 <section className={'flex flex-col max-w-[510px] gap-8 text-[#0F172A]'}>
                     <div>
                         <TypographyH1 className={'lg:text-[48px]'}>Chicago Transit JUST got</TypographyH1>
@@ -129,7 +129,10 @@ export default function Home() {
                                     Simplify travel planning with our all-in-one trip management solution. It&apos;s
                                     designed for both daily commuters and occasional adventurers.
                                 </TypographyP>
-                                <Button variant={'link'} className={'self-center md:self-start max-w-[300px] text-lochinvar-500'}>
+                                <Button
+                                    variant={'link'}
+                                    className={'self-center md:self-start max-w-[300px] text-lochinvar-500'}
+                                >
                                     Learn more {'>'}
                                 </Button>
                             </div>
@@ -148,7 +151,10 @@ export default function Home() {
                                     hassle-free commutes, all easily accessible on your device.
                                 </TypographyP>
 
-                                <Button variant={'link'} className={'self-center md:self-start max-w-[300px] text-lochinvar-500'}>
+                                <Button
+                                    variant={'link'}
+                                    className={'self-center md:self-start max-w-[300px] text-lochinvar-500'}
+                                >
                                     Learn more {'>'}
                                 </Button>
                             </div>
@@ -168,7 +174,10 @@ export default function Home() {
                                     insights and peace of mind.
                                 </TypographyP>
 
-                                <Button variant={'link'} className={'self-center md:self-start max-w-[300px] text-lochinvar-500'}>
+                                <Button
+                                    variant={'link'}
+                                    className={'self-center md:self-start max-w-[300px] text-lochinvar-500'}
+                                >
                                     Learn more {'>'}
                                 </Button>
                             </div>
