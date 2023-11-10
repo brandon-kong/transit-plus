@@ -9,7 +9,7 @@ import { ThemeProvider } from 'next-themes';
 
 const Providers = ({ children }: { children: React.ReactNode }) => (
     <SessionProvider>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
             <LoginModalProvider>
                 <ReportSafetyModalProvider>
                     <CreateTripModalProvider>{children}</CreateTripModalProvider>
